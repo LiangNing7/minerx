@@ -1,0 +1,41 @@
+# ==============================================================================
+# Makefile helper functions for lintes
+#
+
+## Tool Binaries
+GOLANGCI_LINT := golangci-lint
+KUBE_LINT := kube-linter
+
+.PHONY: lint.run
+lint.run: lint.ci lint.kubefiles lint.dockerfiles lint.charts ## Run all available linters.
+
+.PHONY: lint.ci
+lint.ci: lint.golangci-lint lint.minerx ## Run CI-related linters.
+
+.PHONY: lint.golangci-lint
+lint.golangci-lint: tools.verify.golangci-lint ## Run golangci to lint source codes.
+	@echo "===========> Run golangci to lint source codes"
+	@$(GOLANGCI_LINT) run -c $(PROJ_ROOT_DIR)/.golangci.yaml $(PROJ_ROOT_DIR)/...
+
+.PHONY: lint.minerx
+lint.minerx: ## Run linters developed by minerx developers.
+	@$(GO) run cmd/lint-kubelistcheck/main.go $(PROJ_ROOT_DIR)/...
+
+.PHONY: lint.kubefiles
+lint.kubefiles: tools.verify.kube-linter ## Lint protobuf files.
+	@$(KUBE_LINT) lint $(PROJ_ROOT_DIR)/deployments
+
+.PHONY: lint.dockerfiles 
+lint.dockerfiles: image.verify go.build.verify ## Lint dockerfiles.
+	@$(SCRIPTS_DIR)/ci-lint-dockerfiles.sh $(HADOLINT_VER) $(HADOLINT_FAILURE_THRESHOLD)
+
+.PHONY: lint.charts
+lint.charts: tools.verify.helm ## Lint helm charts.
+	$(MAKE) chart.lint
+
+# In actual development, many logs are difficult to follow the logcheck specifications and also do not 
+# need to. Here we only have a basic understanding, and it is not recommended to use lint.logcheck rule.
+.PHONY: lint.logcheck
+lint.logcheck: tools.verify.logcheck ## Tool to check logging calls.
+	@logcheck -check-contextual $(PROJ_ROOT_DIR)/...
+	@logcheck -check-structured $(PROJ_ROOT_DIR)/...

@@ -147,5 +147,12 @@ KUSTOMIZE_INSTALL_SCRIPT ?= "https://raw.githubusercontent.com/kubernetes-sigs/k
 
 HADOLINT_FAILURE_THRESHOLD = warning
 
+# Ensure API directories exist
+.PHONY: verify.api.dirs
+verify.api.dirs: | $(APIROOT) $(APISROOT)
+
+$(APIROOT) $(APISROOT):
+	@mkdir -p $@
+
 APIROOT ?= $(PROJ_ROOT_DIR)/pkg/api
 APISROOT ?= $(PROJ_ROOT_DIR)/pkg/apis

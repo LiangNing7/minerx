@@ -77,11 +77,11 @@ gen.kubeconfig: gen.ca ## Generate kubeconfig files.
 		$(OUTPUT_DIR)/config
 
 .PHONY: gen.protoc.%
-gen.protoc.%: ## Generate go source files from protobuf files for specified component.
+gen.protoc.%: | $(APIROOT) $(APISROOT) ## Generate go source files from protobuf files for specified component.
 	@protoc $(PROTOC_GEN_OPTS) $(shell find $(APIROOT)/$* -name *.proto)
 	@find $(APIROOT)/$* -name "*.pb.go" -exec protoc-go-inject-tag -input={} \;
 
-gen.protoc: ## Generate go source files from protobuf files.
+gen.protoc: | $(APIROOT) $(APISROOT) ## Generate go source files from protobuf files.
 	@protoc $(PROTOC_GEN_OPTS) $(shell find $(APIROOT) -name *.proto)
 	@find $(APIROOT) -name "*.pb.go" -exec protoc-go-inject-tag -input={} \;
 

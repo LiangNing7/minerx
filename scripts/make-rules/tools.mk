@@ -22,6 +22,16 @@ TOOLS_NEEDED_BY_LOCAL_DEPLOY := cfssl
 .PHONY: tools.install
 tools.install: install.ci _install.other tools.print-manual-tool ## Install all tools.
 
+.PHONY: tools.install.protoc
+tools.install.protoc: \
+	tools.install.grpc \
+	tools.install.kratos \
+	tools.install.protoc-go-inject-tag \
+	tools.install.protoc-gen-deepcopy \
+	tools.install.protoc-gen-go-json \
+	tools.install.protoc-gen-defaults \
+	tools.install.protoc-gen-go-errors-code ## Install protoc and all plugins used by PROTOC_GEN_OPTS.
+
 .PHONY: tools.print-manual-tool
 tools.print-manual-tool: 
 	@echo "===========> The following tools may need to be installed manually:"
@@ -254,6 +264,14 @@ _install.protoc-gen-deepcopy:
 .PHONY: _install.protoc-gen-go-json
 _install.protoc-gen-go-json:
 	@$(GO) install github.com/mfridman/protoc-gen-go-json@latest
+
+.PHONY: _install.protoc-gen-defaults
+_install.protoc-gen-defaults:
+	@$(GO) install github.com/onexstack/protoc-gen-defaults@latest
+
+.PHONY: _install.protoc-gen-go-errors-code
+_install.protoc-gen-go-errors-code:
+	@cd $(PROJ_ROOT_DIR) && $(GO) install ./tools/protoc-gen-go-errors-code
 
 .PHONY: _install.go-mod-upgrade
 _install.go-mod-upgrade:

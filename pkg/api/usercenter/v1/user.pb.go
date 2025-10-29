@@ -1052,7 +1052,7 @@ const file_usercenter_v1_user_proto_rawDesc = "" +
 	"\busername\x18\x02 \x01(\tR\busername\x12 \n" +
 	"\voldPassword\x18\x03 \x01(\tR\voldPassword\x12 \n" +
 	"\vnewPassword\x18\x04 \x01(\tR\vnewPassword\"\x18\n" +
-	"\x16UpdatePasswordResponseB4Z2github.com/onexstack/onex/pkg/api/usercenter/v1;v1b\x06proto3"
+	"\x16UpdatePasswordResponseB7Z5github.com/LiangNing7/minerx/pkg/api/usercenter/v1;v1b\x06proto3"
 
 var (
 	file_usercenter_v1_user_proto_rawDescOnce sync.Once

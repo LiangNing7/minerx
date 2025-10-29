@@ -7,7 +7,6 @@
 package v1
 
 import (
-	v1 "github.com/LiangNing7/minerx/pkg/api/usercenter/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -49,42 +48,42 @@ const file_usercenter_v1_usercenter_proto_rawDesc = "" +
 	"\fDeleteSecret\x12\".usercenter.v1.DeleteSecretRequest\x1a#.usercenter.v1.DeleteSecretResponse\"\x1a\x82\xd3\xe4\x93\x02\x14*\x12/v1/secrets/{name}\x12j\n" +
 	"\tGetSecret\x12\x1f.usercenter.v1.GetSecretRequest\x1a .usercenter.v1.GetSecretResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v1/secrets/{name}\x12f\n" +
 	"\n" +
-	"ListSecret\x12 .usercenter.v1.ListSecretRequest\x1a!.usercenter.v1.ListSecretResponse\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/v1/secretsB4Z2github.com/onexstack/onex/pkg/api/usercenter/v1;v1b\x06proto3"
+	"ListSecret\x12 .usercenter.v1.ListSecretRequest\x1a!.usercenter.v1.ListSecretResponse\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/v1/secretsB7Z5github.com/LiangNing7/minerx/pkg/api/usercenter/v1;v1b\x06proto3"
 
 var file_usercenter_v1_usercenter_proto_goTypes = []any{
-	(*LoginRequest)(nil),            // 0: usercenter.v1.LoginRequest
-	(*LogoutRequest)(nil),           // 1: usercenter.v1.LogoutRequest
-	(*RefreshTokenRequest)(nil),     // 2: usercenter.v1.RefreshTokenRequest
-	(*v1.AuthenticateRequest)(nil),  // 3: usercenter.v1.AuthenticateRequest
-	(*v1.AuthorizeRequest)(nil),     // 4: usercenter.v1.AuthorizeRequest
-	(*v1.AuthRequest)(nil),          // 5: usercenter.v1.AuthRequest
-	(*CreateUserRequest)(nil),       // 6: usercenter.v1.CreateUserRequest
-	(*UpdateUserRequest)(nil),       // 7: usercenter.v1.UpdateUserRequest
-	(*DeleteUserRequest)(nil),       // 8: usercenter.v1.DeleteUserRequest
-	(*GetUserRequest)(nil),          // 9: usercenter.v1.GetUserRequest
-	(*ListUserRequest)(nil),         // 10: usercenter.v1.ListUserRequest
-	(*UpdatePasswordRequest)(nil),   // 11: usercenter.v1.UpdatePasswordRequest
-	(*v1.CreateSecretRequest)(nil),  // 12: usercenter.v1.CreateSecretRequest
-	(*v1.UpdateSecretRequest)(nil),  // 13: usercenter.v1.UpdateSecretRequest
-	(*v1.DeleteSecretRequest)(nil),  // 14: usercenter.v1.DeleteSecretRequest
-	(*v1.GetSecretRequest)(nil),     // 15: usercenter.v1.GetSecretRequest
-	(*v1.ListSecretRequest)(nil),    // 16: usercenter.v1.ListSecretRequest
-	(*LoginReply)(nil),              // 17: usercenter.v1.LoginReply
-	(*LogoutResponse)(nil),          // 18: usercenter.v1.LogoutResponse
-	(*v1.AuthenticateResponse)(nil), // 19: usercenter.v1.AuthenticateResponse
-	(*v1.AuthorizeResponse)(nil),    // 20: usercenter.v1.AuthorizeResponse
-	(*v1.AuthResponse)(nil),         // 21: usercenter.v1.AuthResponse
-	(*CreateUserResponse)(nil),      // 22: usercenter.v1.CreateUserResponse
-	(*UpdateUserResponse)(nil),      // 23: usercenter.v1.UpdateUserResponse
-	(*DeleteUserResponse)(nil),      // 24: usercenter.v1.DeleteUserResponse
-	(*GetUserResponse)(nil),         // 25: usercenter.v1.GetUserResponse
-	(*ListUserResponse)(nil),        // 26: usercenter.v1.ListUserResponse
-	(*UpdatePasswordResponse)(nil),  // 27: usercenter.v1.UpdatePasswordResponse
-	(*v1.CreateSecretResponse)(nil), // 28: usercenter.v1.CreateSecretResponse
-	(*v1.UpdateSecretResponse)(nil), // 29: usercenter.v1.UpdateSecretResponse
-	(*v1.DeleteSecretResponse)(nil), // 30: usercenter.v1.DeleteSecretResponse
-	(*v1.GetSecretResponse)(nil),    // 31: usercenter.v1.GetSecretResponse
-	(*v1.ListSecretResponse)(nil),   // 32: usercenter.v1.ListSecretResponse
+	(*LoginRequest)(nil),           // 0: usercenter.v1.LoginRequest
+	(*LogoutRequest)(nil),          // 1: usercenter.v1.LogoutRequest
+	(*RefreshTokenRequest)(nil),    // 2: usercenter.v1.RefreshTokenRequest
+	(*AuthenticateRequest)(nil),    // 3: usercenter.v1.AuthenticateRequest
+	(*AuthorizeRequest)(nil),       // 4: usercenter.v1.AuthorizeRequest
+	(*AuthRequest)(nil),            // 5: usercenter.v1.AuthRequest
+	(*CreateUserRequest)(nil),      // 6: usercenter.v1.CreateUserRequest
+	(*UpdateUserRequest)(nil),      // 7: usercenter.v1.UpdateUserRequest
+	(*DeleteUserRequest)(nil),      // 8: usercenter.v1.DeleteUserRequest
+	(*GetUserRequest)(nil),         // 9: usercenter.v1.GetUserRequest
+	(*ListUserRequest)(nil),        // 10: usercenter.v1.ListUserRequest
+	(*UpdatePasswordRequest)(nil),  // 11: usercenter.v1.UpdatePasswordRequest
+	(*CreateSecretRequest)(nil),    // 12: usercenter.v1.CreateSecretRequest
+	(*UpdateSecretRequest)(nil),    // 13: usercenter.v1.UpdateSecretRequest
+	(*DeleteSecretRequest)(nil),    // 14: usercenter.v1.DeleteSecretRequest
+	(*GetSecretRequest)(nil),       // 15: usercenter.v1.GetSecretRequest
+	(*ListSecretRequest)(nil),      // 16: usercenter.v1.ListSecretRequest
+	(*LoginReply)(nil),             // 17: usercenter.v1.LoginReply
+	(*LogoutResponse)(nil),         // 18: usercenter.v1.LogoutResponse
+	(*AuthenticateResponse)(nil),   // 19: usercenter.v1.AuthenticateResponse
+	(*AuthorizeResponse)(nil),      // 20: usercenter.v1.AuthorizeResponse
+	(*AuthResponse)(nil),           // 21: usercenter.v1.AuthResponse
+	(*CreateUserResponse)(nil),     // 22: usercenter.v1.CreateUserResponse
+	(*UpdateUserResponse)(nil),     // 23: usercenter.v1.UpdateUserResponse
+	(*DeleteUserResponse)(nil),     // 24: usercenter.v1.DeleteUserResponse
+	(*GetUserResponse)(nil),        // 25: usercenter.v1.GetUserResponse
+	(*ListUserResponse)(nil),       // 26: usercenter.v1.ListUserResponse
+	(*UpdatePasswordResponse)(nil), // 27: usercenter.v1.UpdatePasswordResponse
+	(*CreateSecretResponse)(nil),   // 28: usercenter.v1.CreateSecretResponse
+	(*UpdateSecretResponse)(nil),   // 29: usercenter.v1.UpdateSecretResponse
+	(*DeleteSecretResponse)(nil),   // 30: usercenter.v1.DeleteSecretResponse
+	(*GetSecretResponse)(nil),      // 31: usercenter.v1.GetSecretResponse
+	(*ListSecretResponse)(nil),     // 32: usercenter.v1.ListSecretResponse
 }
 var file_usercenter_v1_usercenter_proto_depIdxs = []int32{
 	0,  // 0: usercenter.v1.UserCenter.Login:input_type -> usercenter.v1.LoginRequest
@@ -133,7 +132,9 @@ func file_usercenter_v1_usercenter_proto_init() {
 	if File_usercenter_v1_usercenter_proto != nil {
 		return
 	}
+	file_usercenter_v1_secret_proto_init()
 	file_usercenter_v1_user_proto_init()
+	file_usercenter_v1_auth_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

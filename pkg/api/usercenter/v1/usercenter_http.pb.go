@@ -8,7 +8,6 @@ package v1
 
 import (
 	context "context"
-	v1 "github.com/LiangNing7/minerx/pkg/api/usercenter/v1"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
 )
@@ -40,23 +39,23 @@ const OperationUserCenterUpdateUser = "/usercenter.v1.UserCenter/UpdateUser"
 
 type UserCenterHTTPServer interface {
 	// Auth Auth
-	Auth(context.Context, *v1.AuthRequest) (*v1.AuthResponse, error)
+	Auth(context.Context, *AuthRequest) (*AuthResponse, error)
 	// Authenticate Authenticate
-	Authenticate(context.Context, *v1.AuthenticateRequest) (*v1.AuthenticateResponse, error)
+	Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error)
 	// Authorize Authorize
-	Authorize(context.Context, *v1.AuthorizeRequest) (*v1.AuthorizeResponse, error)
+	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
 	// CreateSecret CreateSecret
-	CreateSecret(context.Context, *v1.CreateSecretRequest) (*v1.CreateSecretResponse, error)
+	CreateSecret(context.Context, *CreateSecretRequest) (*CreateSecretResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	// DeleteSecret DeleteSecret
-	DeleteSecret(context.Context, *v1.DeleteSecretRequest) (*v1.DeleteSecretResponse, error)
+	DeleteSecret(context.Context, *DeleteSecretRequest) (*DeleteSecretResponse, error)
 	// DeleteUser DeleteUser
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
 	// GetSecret GetSecret
-	GetSecret(context.Context, *v1.GetSecretRequest) (*v1.GetSecretResponse, error)
+	GetSecret(context.Context, *GetSecretRequest) (*GetSecretResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	// ListSecret ListSecret
-	ListSecret(context.Context, *v1.ListSecretRequest) (*v1.ListSecretResponse, error)
+	ListSecret(context.Context, *ListSecretRequest) (*ListSecretResponse, error)
 	// ListUser ListUser
 	ListUser(context.Context, *ListUserRequest) (*ListUserResponse, error)
 	// Login Login
@@ -68,7 +67,7 @@ type UserCenterHTTPServer interface {
 	// UpdatePassword UpdatePassword
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error)
 	// UpdateSecret UpdateSecret
-	UpdateSecret(context.Context, *v1.UpdateSecretRequest) (*v1.UpdateSecretResponse, error)
+	UpdateSecret(context.Context, *UpdateSecretRequest) (*UpdateSecretResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 }
 
@@ -161,7 +160,7 @@ func _UserCenter_RefreshToken0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx h
 
 func _UserCenter_Authenticate0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.AuthenticateRequest
+		var in AuthenticateRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -170,20 +169,20 @@ func _UserCenter_Authenticate0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx h
 		}
 		http.SetOperation(ctx, OperationUserCenterAuthenticate)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Authenticate(ctx, req.(*v1.AuthenticateRequest))
+			return srv.Authenticate(ctx, req.(*AuthenticateRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.AuthenticateResponse)
+		reply := out.(*AuthenticateResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _UserCenter_Authorize0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.AuthorizeRequest
+		var in AuthorizeRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -192,20 +191,20 @@ func _UserCenter_Authorize0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http
 		}
 		http.SetOperation(ctx, OperationUserCenterAuthorize)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Authorize(ctx, req.(*v1.AuthorizeRequest))
+			return srv.Authorize(ctx, req.(*AuthorizeRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.AuthorizeResponse)
+		reply := out.(*AuthorizeResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _UserCenter_Auth0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.AuthRequest
+		var in AuthRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -214,13 +213,13 @@ func _UserCenter_Auth0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Cont
 		}
 		http.SetOperation(ctx, OperationUserCenterAuth)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Auth(ctx, req.(*v1.AuthRequest))
+			return srv.Auth(ctx, req.(*AuthRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.AuthResponse)
+		reply := out.(*AuthResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -362,7 +361,7 @@ func _UserCenter_UpdatePassword0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx
 
 func _UserCenter_CreateSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.CreateSecretRequest
+		var in CreateSecretRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -371,20 +370,20 @@ func _UserCenter_CreateSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx h
 		}
 		http.SetOperation(ctx, OperationUserCenterCreateSecret)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateSecret(ctx, req.(*v1.CreateSecretRequest))
+			return srv.CreateSecret(ctx, req.(*CreateSecretRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.CreateSecretResponse)
+		reply := out.(*CreateSecretResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _UserCenter_UpdateSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.UpdateSecretRequest
+		var in UpdateSecretRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -396,20 +395,20 @@ func _UserCenter_UpdateSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx h
 		}
 		http.SetOperation(ctx, OperationUserCenterUpdateSecret)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateSecret(ctx, req.(*v1.UpdateSecretRequest))
+			return srv.UpdateSecret(ctx, req.(*UpdateSecretRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.UpdateSecretResponse)
+		reply := out.(*UpdateSecretResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _UserCenter_DeleteSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.DeleteSecretRequest
+		var in DeleteSecretRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
@@ -418,20 +417,20 @@ func _UserCenter_DeleteSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx h
 		}
 		http.SetOperation(ctx, OperationUserCenterDeleteSecret)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteSecret(ctx, req.(*v1.DeleteSecretRequest))
+			return srv.DeleteSecret(ctx, req.(*DeleteSecretRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.DeleteSecretResponse)
+		reply := out.(*DeleteSecretResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _UserCenter_GetSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.GetSecretRequest
+		var in GetSecretRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
@@ -440,55 +439,55 @@ func _UserCenter_GetSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http
 		}
 		http.SetOperation(ctx, OperationUserCenterGetSecret)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetSecret(ctx, req.(*v1.GetSecretRequest))
+			return srv.GetSecret(ctx, req.(*GetSecretRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.GetSecretResponse)
+		reply := out.(*GetSecretResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _UserCenter_ListSecret0_HTTP_Handler(srv UserCenterHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.ListSecretRequest
+		var in ListSecretRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUserCenterListSecret)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListSecret(ctx, req.(*v1.ListSecretRequest))
+			return srv.ListSecret(ctx, req.(*ListSecretRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.ListSecretResponse)
+		reply := out.(*ListSecretResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type UserCenterHTTPClient interface {
 	// Auth Auth
-	Auth(ctx context.Context, req *v1.AuthRequest, opts ...http.CallOption) (rsp *v1.AuthResponse, err error)
+	Auth(ctx context.Context, req *AuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	// Authenticate Authenticate
-	Authenticate(ctx context.Context, req *v1.AuthenticateRequest, opts ...http.CallOption) (rsp *v1.AuthenticateResponse, err error)
+	Authenticate(ctx context.Context, req *AuthenticateRequest, opts ...http.CallOption) (rsp *AuthenticateResponse, err error)
 	// Authorize Authorize
-	Authorize(ctx context.Context, req *v1.AuthorizeRequest, opts ...http.CallOption) (rsp *v1.AuthorizeResponse, err error)
+	Authorize(ctx context.Context, req *AuthorizeRequest, opts ...http.CallOption) (rsp *AuthorizeResponse, err error)
 	// CreateSecret CreateSecret
-	CreateSecret(ctx context.Context, req *v1.CreateSecretRequest, opts ...http.CallOption) (rsp *v1.CreateSecretResponse, err error)
+	CreateSecret(ctx context.Context, req *CreateSecretRequest, opts ...http.CallOption) (rsp *CreateSecretResponse, err error)
 	CreateUser(ctx context.Context, req *CreateUserRequest, opts ...http.CallOption) (rsp *CreateUserResponse, err error)
 	// DeleteSecret DeleteSecret
-	DeleteSecret(ctx context.Context, req *v1.DeleteSecretRequest, opts ...http.CallOption) (rsp *v1.DeleteSecretResponse, err error)
+	DeleteSecret(ctx context.Context, req *DeleteSecretRequest, opts ...http.CallOption) (rsp *DeleteSecretResponse, err error)
 	// DeleteUser DeleteUser
 	DeleteUser(ctx context.Context, req *DeleteUserRequest, opts ...http.CallOption) (rsp *DeleteUserResponse, err error)
 	// GetSecret GetSecret
-	GetSecret(ctx context.Context, req *v1.GetSecretRequest, opts ...http.CallOption) (rsp *v1.GetSecretResponse, err error)
+	GetSecret(ctx context.Context, req *GetSecretRequest, opts ...http.CallOption) (rsp *GetSecretResponse, err error)
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
 	// ListSecret ListSecret
-	ListSecret(ctx context.Context, req *v1.ListSecretRequest, opts ...http.CallOption) (rsp *v1.ListSecretResponse, err error)
+	ListSecret(ctx context.Context, req *ListSecretRequest, opts ...http.CallOption) (rsp *ListSecretResponse, err error)
 	// ListUser ListUser
 	ListUser(ctx context.Context, req *ListUserRequest, opts ...http.CallOption) (rsp *ListUserResponse, err error)
 	// Login Login
@@ -500,7 +499,7 @@ type UserCenterHTTPClient interface {
 	// UpdatePassword UpdatePassword
 	UpdatePassword(ctx context.Context, req *UpdatePasswordRequest, opts ...http.CallOption) (rsp *UpdatePasswordResponse, err error)
 	// UpdateSecret UpdateSecret
-	UpdateSecret(ctx context.Context, req *v1.UpdateSecretRequest, opts ...http.CallOption) (rsp *v1.UpdateSecretResponse, err error)
+	UpdateSecret(ctx context.Context, req *UpdateSecretRequest, opts ...http.CallOption) (rsp *UpdateSecretResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
 }
 
@@ -513,8 +512,8 @@ func NewUserCenterHTTPClient(client *http.Client) UserCenterHTTPClient {
 }
 
 // Auth Auth
-func (c *UserCenterHTTPClientImpl) Auth(ctx context.Context, in *v1.AuthRequest, opts ...http.CallOption) (*v1.AuthResponse, error) {
-	var out v1.AuthResponse
+func (c *UserCenterHTTPClientImpl) Auth(ctx context.Context, in *AuthRequest, opts ...http.CallOption) (*AuthResponse, error) {
+	var out AuthResponse
 	pattern := "/v1/auth/auth"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserCenterAuth))
@@ -527,8 +526,8 @@ func (c *UserCenterHTTPClientImpl) Auth(ctx context.Context, in *v1.AuthRequest,
 }
 
 // Authenticate Authenticate
-func (c *UserCenterHTTPClientImpl) Authenticate(ctx context.Context, in *v1.AuthenticateRequest, opts ...http.CallOption) (*v1.AuthenticateResponse, error) {
-	var out v1.AuthenticateResponse
+func (c *UserCenterHTTPClientImpl) Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...http.CallOption) (*AuthenticateResponse, error) {
+	var out AuthenticateResponse
 	pattern := "/v1/auth/authenticate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserCenterAuthenticate))
@@ -541,8 +540,8 @@ func (c *UserCenterHTTPClientImpl) Authenticate(ctx context.Context, in *v1.Auth
 }
 
 // Authorize Authorize
-func (c *UserCenterHTTPClientImpl) Authorize(ctx context.Context, in *v1.AuthorizeRequest, opts ...http.CallOption) (*v1.AuthorizeResponse, error) {
-	var out v1.AuthorizeResponse
+func (c *UserCenterHTTPClientImpl) Authorize(ctx context.Context, in *AuthorizeRequest, opts ...http.CallOption) (*AuthorizeResponse, error) {
+	var out AuthorizeResponse
 	pattern := "/v1/auth/authorize"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserCenterAuthorize))
@@ -555,8 +554,8 @@ func (c *UserCenterHTTPClientImpl) Authorize(ctx context.Context, in *v1.Authori
 }
 
 // CreateSecret CreateSecret
-func (c *UserCenterHTTPClientImpl) CreateSecret(ctx context.Context, in *v1.CreateSecretRequest, opts ...http.CallOption) (*v1.CreateSecretResponse, error) {
-	var out v1.CreateSecretResponse
+func (c *UserCenterHTTPClientImpl) CreateSecret(ctx context.Context, in *CreateSecretRequest, opts ...http.CallOption) (*CreateSecretResponse, error) {
+	var out CreateSecretResponse
 	pattern := "/v1/secrets"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserCenterCreateSecret))
@@ -582,8 +581,8 @@ func (c *UserCenterHTTPClientImpl) CreateUser(ctx context.Context, in *CreateUse
 }
 
 // DeleteSecret DeleteSecret
-func (c *UserCenterHTTPClientImpl) DeleteSecret(ctx context.Context, in *v1.DeleteSecretRequest, opts ...http.CallOption) (*v1.DeleteSecretResponse, error) {
-	var out v1.DeleteSecretResponse
+func (c *UserCenterHTTPClientImpl) DeleteSecret(ctx context.Context, in *DeleteSecretRequest, opts ...http.CallOption) (*DeleteSecretResponse, error) {
+	var out DeleteSecretResponse
 	pattern := "/v1/secrets/{name}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationUserCenterDeleteSecret))
@@ -610,8 +609,8 @@ func (c *UserCenterHTTPClientImpl) DeleteUser(ctx context.Context, in *DeleteUse
 }
 
 // GetSecret GetSecret
-func (c *UserCenterHTTPClientImpl) GetSecret(ctx context.Context, in *v1.GetSecretRequest, opts ...http.CallOption) (*v1.GetSecretResponse, error) {
-	var out v1.GetSecretResponse
+func (c *UserCenterHTTPClientImpl) GetSecret(ctx context.Context, in *GetSecretRequest, opts ...http.CallOption) (*GetSecretResponse, error) {
+	var out GetSecretResponse
 	pattern := "/v1/secrets/{name}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationUserCenterGetSecret))
@@ -637,8 +636,8 @@ func (c *UserCenterHTTPClientImpl) GetUser(ctx context.Context, in *GetUserReque
 }
 
 // ListSecret ListSecret
-func (c *UserCenterHTTPClientImpl) ListSecret(ctx context.Context, in *v1.ListSecretRequest, opts ...http.CallOption) (*v1.ListSecretResponse, error) {
-	var out v1.ListSecretResponse
+func (c *UserCenterHTTPClientImpl) ListSecret(ctx context.Context, in *ListSecretRequest, opts ...http.CallOption) (*ListSecretResponse, error) {
+	var out ListSecretResponse
 	pattern := "/v1/secrets"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationUserCenterListSecret))
@@ -721,8 +720,8 @@ func (c *UserCenterHTTPClientImpl) UpdatePassword(ctx context.Context, in *Updat
 }
 
 // UpdateSecret UpdateSecret
-func (c *UserCenterHTTPClientImpl) UpdateSecret(ctx context.Context, in *v1.UpdateSecretRequest, opts ...http.CallOption) (*v1.UpdateSecretResponse, error) {
-	var out v1.UpdateSecretResponse
+func (c *UserCenterHTTPClientImpl) UpdateSecret(ctx context.Context, in *UpdateSecretRequest, opts ...http.CallOption) (*UpdateSecretResponse, error) {
+	var out UpdateSecretResponse
 	pattern := "/v1/secrets/{name}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserCenterUpdateSecret))

@@ -8,7 +8,6 @@ package v1
 
 import (
 	context "context"
-	v1 "github.com/LiangNing7/minerx/pkg/api/usercenter/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -52,11 +51,11 @@ type UserCenterClient interface {
 	// RefreshToken
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*LoginReply, error)
 	// Authenticate
-	Authenticate(ctx context.Context, in *v1.AuthenticateRequest, opts ...grpc.CallOption) (*v1.AuthenticateResponse, error)
+	Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error)
 	// Authorize
-	Authorize(ctx context.Context, in *v1.AuthorizeRequest, opts ...grpc.CallOption) (*v1.AuthorizeResponse, error)
+	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
 	// Auth
-	Auth(ctx context.Context, in *v1.AuthRequest, opts ...grpc.CallOption) (*v1.AuthResponse, error)
+	Auth(ctx context.Context, in *AuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	// DeleteUser
@@ -67,15 +66,15 @@ type UserCenterClient interface {
 	// UpdatePassword
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error)
 	// CreateSecret
-	CreateSecret(ctx context.Context, in *v1.CreateSecretRequest, opts ...grpc.CallOption) (*v1.CreateSecretResponse, error)
+	CreateSecret(ctx context.Context, in *CreateSecretRequest, opts ...grpc.CallOption) (*CreateSecretResponse, error)
 	// UpdateSecret
-	UpdateSecret(ctx context.Context, in *v1.UpdateSecretRequest, opts ...grpc.CallOption) (*v1.UpdateSecretResponse, error)
+	UpdateSecret(ctx context.Context, in *UpdateSecretRequest, opts ...grpc.CallOption) (*UpdateSecretResponse, error)
 	// DeleteSecret
-	DeleteSecret(ctx context.Context, in *v1.DeleteSecretRequest, opts ...grpc.CallOption) (*v1.DeleteSecretResponse, error)
+	DeleteSecret(ctx context.Context, in *DeleteSecretRequest, opts ...grpc.CallOption) (*DeleteSecretResponse, error)
 	// GetSecret
-	GetSecret(ctx context.Context, in *v1.GetSecretRequest, opts ...grpc.CallOption) (*v1.GetSecretResponse, error)
+	GetSecret(ctx context.Context, in *GetSecretRequest, opts ...grpc.CallOption) (*GetSecretResponse, error)
 	// ListSecret
-	ListSecret(ctx context.Context, in *v1.ListSecretRequest, opts ...grpc.CallOption) (*v1.ListSecretResponse, error)
+	ListSecret(ctx context.Context, in *ListSecretRequest, opts ...grpc.CallOption) (*ListSecretResponse, error)
 }
 
 type userCenterClient struct {
@@ -116,9 +115,9 @@ func (c *userCenterClient) RefreshToken(ctx context.Context, in *RefreshTokenReq
 	return out, nil
 }
 
-func (c *userCenterClient) Authenticate(ctx context.Context, in *v1.AuthenticateRequest, opts ...grpc.CallOption) (*v1.AuthenticateResponse, error) {
+func (c *userCenterClient) Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.AuthenticateResponse)
+	out := new(AuthenticateResponse)
 	err := c.cc.Invoke(ctx, UserCenter_Authenticate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -126,9 +125,9 @@ func (c *userCenterClient) Authenticate(ctx context.Context, in *v1.Authenticate
 	return out, nil
 }
 
-func (c *userCenterClient) Authorize(ctx context.Context, in *v1.AuthorizeRequest, opts ...grpc.CallOption) (*v1.AuthorizeResponse, error) {
+func (c *userCenterClient) Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.AuthorizeResponse)
+	out := new(AuthorizeResponse)
 	err := c.cc.Invoke(ctx, UserCenter_Authorize_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -136,9 +135,9 @@ func (c *userCenterClient) Authorize(ctx context.Context, in *v1.AuthorizeReques
 	return out, nil
 }
 
-func (c *userCenterClient) Auth(ctx context.Context, in *v1.AuthRequest, opts ...grpc.CallOption) (*v1.AuthResponse, error) {
+func (c *userCenterClient) Auth(ctx context.Context, in *AuthRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.AuthResponse)
+	out := new(AuthResponse)
 	err := c.cc.Invoke(ctx, UserCenter_Auth_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -206,9 +205,9 @@ func (c *userCenterClient) UpdatePassword(ctx context.Context, in *UpdatePasswor
 	return out, nil
 }
 
-func (c *userCenterClient) CreateSecret(ctx context.Context, in *v1.CreateSecretRequest, opts ...grpc.CallOption) (*v1.CreateSecretResponse, error) {
+func (c *userCenterClient) CreateSecret(ctx context.Context, in *CreateSecretRequest, opts ...grpc.CallOption) (*CreateSecretResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.CreateSecretResponse)
+	out := new(CreateSecretResponse)
 	err := c.cc.Invoke(ctx, UserCenter_CreateSecret_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -216,9 +215,9 @@ func (c *userCenterClient) CreateSecret(ctx context.Context, in *v1.CreateSecret
 	return out, nil
 }
 
-func (c *userCenterClient) UpdateSecret(ctx context.Context, in *v1.UpdateSecretRequest, opts ...grpc.CallOption) (*v1.UpdateSecretResponse, error) {
+func (c *userCenterClient) UpdateSecret(ctx context.Context, in *UpdateSecretRequest, opts ...grpc.CallOption) (*UpdateSecretResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.UpdateSecretResponse)
+	out := new(UpdateSecretResponse)
 	err := c.cc.Invoke(ctx, UserCenter_UpdateSecret_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -226,9 +225,9 @@ func (c *userCenterClient) UpdateSecret(ctx context.Context, in *v1.UpdateSecret
 	return out, nil
 }
 
-func (c *userCenterClient) DeleteSecret(ctx context.Context, in *v1.DeleteSecretRequest, opts ...grpc.CallOption) (*v1.DeleteSecretResponse, error) {
+func (c *userCenterClient) DeleteSecret(ctx context.Context, in *DeleteSecretRequest, opts ...grpc.CallOption) (*DeleteSecretResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.DeleteSecretResponse)
+	out := new(DeleteSecretResponse)
 	err := c.cc.Invoke(ctx, UserCenter_DeleteSecret_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -236,9 +235,9 @@ func (c *userCenterClient) DeleteSecret(ctx context.Context, in *v1.DeleteSecret
 	return out, nil
 }
 
-func (c *userCenterClient) GetSecret(ctx context.Context, in *v1.GetSecretRequest, opts ...grpc.CallOption) (*v1.GetSecretResponse, error) {
+func (c *userCenterClient) GetSecret(ctx context.Context, in *GetSecretRequest, opts ...grpc.CallOption) (*GetSecretResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.GetSecretResponse)
+	out := new(GetSecretResponse)
 	err := c.cc.Invoke(ctx, UserCenter_GetSecret_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -246,9 +245,9 @@ func (c *userCenterClient) GetSecret(ctx context.Context, in *v1.GetSecretReques
 	return out, nil
 }
 
-func (c *userCenterClient) ListSecret(ctx context.Context, in *v1.ListSecretRequest, opts ...grpc.CallOption) (*v1.ListSecretResponse, error) {
+func (c *userCenterClient) ListSecret(ctx context.Context, in *ListSecretRequest, opts ...grpc.CallOption) (*ListSecretResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.ListSecretResponse)
+	out := new(ListSecretResponse)
 	err := c.cc.Invoke(ctx, UserCenter_ListSecret_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -269,11 +268,11 @@ type UserCenterServer interface {
 	// RefreshToken
 	RefreshToken(context.Context, *RefreshTokenRequest) (*LoginReply, error)
 	// Authenticate
-	Authenticate(context.Context, *v1.AuthenticateRequest) (*v1.AuthenticateResponse, error)
+	Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error)
 	// Authorize
-	Authorize(context.Context, *v1.AuthorizeRequest) (*v1.AuthorizeResponse, error)
+	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
 	// Auth
-	Auth(context.Context, *v1.AuthRequest) (*v1.AuthResponse, error)
+	Auth(context.Context, *AuthRequest) (*AuthResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	// DeleteUser
@@ -284,15 +283,15 @@ type UserCenterServer interface {
 	// UpdatePassword
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error)
 	// CreateSecret
-	CreateSecret(context.Context, *v1.CreateSecretRequest) (*v1.CreateSecretResponse, error)
+	CreateSecret(context.Context, *CreateSecretRequest) (*CreateSecretResponse, error)
 	// UpdateSecret
-	UpdateSecret(context.Context, *v1.UpdateSecretRequest) (*v1.UpdateSecretResponse, error)
+	UpdateSecret(context.Context, *UpdateSecretRequest) (*UpdateSecretResponse, error)
 	// DeleteSecret
-	DeleteSecret(context.Context, *v1.DeleteSecretRequest) (*v1.DeleteSecretResponse, error)
+	DeleteSecret(context.Context, *DeleteSecretRequest) (*DeleteSecretResponse, error)
 	// GetSecret
-	GetSecret(context.Context, *v1.GetSecretRequest) (*v1.GetSecretResponse, error)
+	GetSecret(context.Context, *GetSecretRequest) (*GetSecretResponse, error)
 	// ListSecret
-	ListSecret(context.Context, *v1.ListSecretRequest) (*v1.ListSecretResponse, error)
+	ListSecret(context.Context, *ListSecretRequest) (*ListSecretResponse, error)
 	mustEmbedUnimplementedUserCenterServer()
 }
 
@@ -312,13 +311,13 @@ func (UnimplementedUserCenterServer) Logout(context.Context, *LogoutRequest) (*L
 func (UnimplementedUserCenterServer) RefreshToken(context.Context, *RefreshTokenRequest) (*LoginReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
-func (UnimplementedUserCenterServer) Authenticate(context.Context, *v1.AuthenticateRequest) (*v1.AuthenticateResponse, error) {
+func (UnimplementedUserCenterServer) Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Authenticate not implemented")
 }
-func (UnimplementedUserCenterServer) Authorize(context.Context, *v1.AuthorizeRequest) (*v1.AuthorizeResponse, error) {
+func (UnimplementedUserCenterServer) Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
 }
-func (UnimplementedUserCenterServer) Auth(context.Context, *v1.AuthRequest) (*v1.AuthResponse, error) {
+func (UnimplementedUserCenterServer) Auth(context.Context, *AuthRequest) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Auth not implemented")
 }
 func (UnimplementedUserCenterServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
@@ -339,19 +338,19 @@ func (UnimplementedUserCenterServer) ListUser(context.Context, *ListUserRequest)
 func (UnimplementedUserCenterServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
 }
-func (UnimplementedUserCenterServer) CreateSecret(context.Context, *v1.CreateSecretRequest) (*v1.CreateSecretResponse, error) {
+func (UnimplementedUserCenterServer) CreateSecret(context.Context, *CreateSecretRequest) (*CreateSecretResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSecret not implemented")
 }
-func (UnimplementedUserCenterServer) UpdateSecret(context.Context, *v1.UpdateSecretRequest) (*v1.UpdateSecretResponse, error) {
+func (UnimplementedUserCenterServer) UpdateSecret(context.Context, *UpdateSecretRequest) (*UpdateSecretResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSecret not implemented")
 }
-func (UnimplementedUserCenterServer) DeleteSecret(context.Context, *v1.DeleteSecretRequest) (*v1.DeleteSecretResponse, error) {
+func (UnimplementedUserCenterServer) DeleteSecret(context.Context, *DeleteSecretRequest) (*DeleteSecretResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSecret not implemented")
 }
-func (UnimplementedUserCenterServer) GetSecret(context.Context, *v1.GetSecretRequest) (*v1.GetSecretResponse, error) {
+func (UnimplementedUserCenterServer) GetSecret(context.Context, *GetSecretRequest) (*GetSecretResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSecret not implemented")
 }
-func (UnimplementedUserCenterServer) ListSecret(context.Context, *v1.ListSecretRequest) (*v1.ListSecretResponse, error) {
+func (UnimplementedUserCenterServer) ListSecret(context.Context, *ListSecretRequest) (*ListSecretResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSecret not implemented")
 }
 func (UnimplementedUserCenterServer) mustEmbedUnimplementedUserCenterServer() {}
@@ -430,7 +429,7 @@ func _UserCenter_RefreshToken_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 func _UserCenter_Authenticate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.AuthenticateRequest)
+	in := new(AuthenticateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -442,13 +441,13 @@ func _UserCenter_Authenticate_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: UserCenter_Authenticate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCenterServer).Authenticate(ctx, req.(*v1.AuthenticateRequest))
+		return srv.(UserCenterServer).Authenticate(ctx, req.(*AuthenticateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserCenter_Authorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.AuthorizeRequest)
+	in := new(AuthorizeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -460,13 +459,13 @@ func _UserCenter_Authorize_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: UserCenter_Authorize_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCenterServer).Authorize(ctx, req.(*v1.AuthorizeRequest))
+		return srv.(UserCenterServer).Authorize(ctx, req.(*AuthorizeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserCenter_Auth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.AuthRequest)
+	in := new(AuthRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -478,7 +477,7 @@ func _UserCenter_Auth_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: UserCenter_Auth_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCenterServer).Auth(ctx, req.(*v1.AuthRequest))
+		return srv.(UserCenterServer).Auth(ctx, req.(*AuthRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -592,7 +591,7 @@ func _UserCenter_UpdatePassword_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _UserCenter_CreateSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.CreateSecretRequest)
+	in := new(CreateSecretRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -604,13 +603,13 @@ func _UserCenter_CreateSecret_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: UserCenter_CreateSecret_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCenterServer).CreateSecret(ctx, req.(*v1.CreateSecretRequest))
+		return srv.(UserCenterServer).CreateSecret(ctx, req.(*CreateSecretRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserCenter_UpdateSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.UpdateSecretRequest)
+	in := new(UpdateSecretRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -622,13 +621,13 @@ func _UserCenter_UpdateSecret_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: UserCenter_UpdateSecret_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCenterServer).UpdateSecret(ctx, req.(*v1.UpdateSecretRequest))
+		return srv.(UserCenterServer).UpdateSecret(ctx, req.(*UpdateSecretRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserCenter_DeleteSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.DeleteSecretRequest)
+	in := new(DeleteSecretRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -640,13 +639,13 @@ func _UserCenter_DeleteSecret_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: UserCenter_DeleteSecret_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCenterServer).DeleteSecret(ctx, req.(*v1.DeleteSecretRequest))
+		return srv.(UserCenterServer).DeleteSecret(ctx, req.(*DeleteSecretRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserCenter_GetSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetSecretRequest)
+	in := new(GetSecretRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -658,13 +657,13 @@ func _UserCenter_GetSecret_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: UserCenter_GetSecret_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCenterServer).GetSecret(ctx, req.(*v1.GetSecretRequest))
+		return srv.(UserCenterServer).GetSecret(ctx, req.(*GetSecretRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserCenter_ListSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListSecretRequest)
+	in := new(ListSecretRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -676,7 +675,7 @@ func _UserCenter_ListSecret_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: UserCenter_ListSecret_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCenterServer).ListSecret(ctx, req.(*v1.ListSecretRequest))
+		return srv.(UserCenterServer).ListSecret(ctx, req.(*ListSecretRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

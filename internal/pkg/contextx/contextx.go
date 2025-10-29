@@ -4,8 +4,9 @@ package contextx
 import (
 	"context"
 
-	"github.com/LiangNing7/minerx/internal/usercenter/model"
 	"github.com/golang-jwt/jwt/v4"
+
+	"github.com/LiangNing7/minerx/internal/usercenter/model"
 )
 
 // 定义全局上下文中的键.

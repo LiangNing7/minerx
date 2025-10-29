@@ -76,7 +76,9 @@ func NewServerOptions() *ServerOptions {
 }
 
 // Flags returns flags for a specific server by section name.
-func (o *ServerOptions) Flags() (fss cliflag.NamedFlagSets) {
+func (o *ServerOptions) Flags() cliflag.NamedFlagSets {
+	var fss cliflag.NamedFlagSets
+
 	o.GRPCOptions.AddFlags(fss.FlagSet("grpc"))
 	o.HTTPOptions.AddFlags(fss.FlagSet("http"))
 	o.TLSOptions.AddFlags(fss.FlagSet("tls"))

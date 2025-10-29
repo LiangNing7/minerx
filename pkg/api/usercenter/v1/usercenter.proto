@@ -7,7 +7,7 @@ import "usercenter/v1/secret.proto";
 import "usercenter/v1/user.proto";
 import "usercenter/v1/auth.proto";
 
-option go_package = "github.com/onexstack/onex/pkg/api/usercenter/v1;v1";
+option go_package = "github.com/LiangNing7/minerx/pkg/api/usercenter/v1;v1";
 
 // Peer lists  hubble peers and notifies of changes.
 service UserCenter{

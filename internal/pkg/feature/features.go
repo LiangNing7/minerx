@@ -24,6 +24,7 @@ const (
 	MachinePool featuregate.Feature = "MachinePool"
 )
 
+//nolint:gochecknoinits
 func init() {
 	// runtime.Must(utilfeature.DefaultMutableFeatureGate.Add(defaultMinerXFeatureGates))
 	runtime.Must(DefaultMutableFeatureGate.Add(defaultMinerXFeatureGates))

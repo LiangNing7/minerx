@@ -37,13 +37,18 @@ type Server struct {
 }
 
 // ServerConfig contains the core dependencies and configurations of the server.
+//
+//nolint:unused
 type ServerConfig struct {
 	cfg *Config
 }
 
 // NewServer initializes and returns a new Server instance.
+//
+//nolint:unused
 func (cfg *Config) NewServer(ctx context.Context) (*Server, error) {
 	// TODO:
+	_ = cfg
 	return &Server{}, nil
 }
 

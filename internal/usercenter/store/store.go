@@ -1,6 +1,6 @@
 package store
 
-//go:generate mockgen -destination mock_store.go -package store minerx/internal/usercenter/store IStore
+//go:generate mockgen -destination mock_store.go -package store minerx/internal/usercenter/store IStore,UserStore,SecretStore
 
 import (
 	"context"
@@ -30,6 +30,10 @@ type IStore interface {
 	DB(ctx context.Context, wheres ...where.Where) *gorm.DB
 	// TX is used to implement transactions in the Biz layer.
 	TX(ctx context.Context, fn func(ctx context.Context) error) error
+	// User returns an implementation of the UserStore.
+	User() UserStore
+	// Secret returns an implementation of the SecretStore.
+	Secret() SecretStore
 }
 
 // transactionKey is the key used to store transaction context in context.Context.
@@ -87,4 +91,14 @@ func (store *datastore) TX(ctx context.Context, fn func(ctx context.Context) err
 			return fn(ctx)
 		},
 	)
+}
+
+// User returns an instance that implements the UserStore.
+func (store *datastore) User() UserStore {
+	return newUserStore(store)
+}
+
+// Secret returns an instance that implements the SecretStore.
+func (store *datastore) Secret() SecretStore {
+	return newSecretStore(store)
 }

@@ -114,7 +114,7 @@ gen.appconfig: $(addprefix gen.appconfig., $(SERVICES)) ## Generate all applicat
 
 .PHONY: gen.appconfig.%
 gen.appconfig.%: ## Generate specified application configuration file.
-	$(eval MINERX_ENV_FILE ?= $(MANIFESTS_DIR)/env.local)
+	$(eval MINERX_ENV_FILE ?= $(MANIFESTS_DIR)/env/env.local)
 	$(eval GENERATED_SERVICE_DIR := $(OUTPUT_DIR)/appconfig)
 	$(eval SERVICE := $(lastword $(subst ., ,$*)))
 	@echo "===========> Generating $(SERVICE) configuration file"

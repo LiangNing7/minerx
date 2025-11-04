@@ -9,6 +9,8 @@ require (
 	github.com/casbin/gorm-adapter/v3 v3.32.0
 	github.com/casbin/redis-watcher/v2 v2.5.0
 	github.com/gin-gonic/gin v1.10.0
+	github.com/go-kratos/kratos/contrib/registry/consul/v2 v2.0.0-20250527152916-d6f5f00cf562
+	github.com/go-kratos/kratos/contrib/registry/etcd/v2 v2.0.0-20250527152916-d6f5f00cf562
 	github.com/go-kratos/kratos/v2 v2.8.4
 	github.com/go-kratos/swagger-api v1.0.1
 	github.com/go-resty/resty/v2 v2.16.5
@@ -18,6 +20,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.7.0
 	github.com/gorilla/handlers v1.5.2
+	github.com/hashicorp/consul/api v1.32.1
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/onsi/ginkgo/v2 v2.22.2
 	github.com/prometheus/client_golang v1.22.0
@@ -25,6 +28,8 @@ require (
 	github.com/redis/go-redis/v9 v9.8.0
 	github.com/segmentio/kafka-go v0.4.48
 	github.com/spf13/pflag v1.0.6
+	go.etcd.io/etcd/client/v3 v3.6.0
+	go.opencensus.io v0.24.0
 	go.opentelemetry.io/otel v1.35.0
 	go.opentelemetry.io/otel/trace v1.35.0
 	go.uber.org/automaxprocs v1.6.0
@@ -80,8 +85,6 @@ require (
 	github.com/glebarez/sqlite v1.7.0 // indirect
 	github.com/go-kratos/aegis v0.2.0 // indirect
 	github.com/go-kratos/grpc-gateway/v2 v2.5.1-0.20210811062259-c92d36e434b1 // indirect
-	github.com/go-kratos/kratos/contrib/registry/consul/v2 v2.0.0-20250527152916-d6f5f00cf562 // indirect
-	github.com/go-kratos/kratos/contrib/registry/etcd/v2 v2.0.0-20250527152916-d6f5f00cf562 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
@@ -110,7 +113,6 @@ require (
 	github.com/gosuri/uitable v0.0.4 // indirect
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 // indirect
-	github.com/hashicorp/consul/api v1.32.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-hclog v1.5.0 // indirect
@@ -179,9 +181,7 @@ require (
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
 	go.etcd.io/etcd/api/v3 v3.6.0 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.6.0 // indirect
-	go.etcd.io/etcd/client/v3 v3.6.0 // indirect
 	go.mongodb.org/mongo-driver v1.17.3 // indirect
-	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.58.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.58.0 // indirect

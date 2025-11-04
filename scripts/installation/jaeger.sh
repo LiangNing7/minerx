@@ -56,6 +56,24 @@ minerx::jaeger::sbs::uninstall()
   minerx::log::info "uninstall jaeger successfully"
 }
 
+# Start the jaeger container.
+minerx::jaeger::docker::start()
+{
+  docker start minerx-jaeger &>/dev/null && minerx::log::info "jaeger started successfully" || minerx::log::error "failed to start jaeger"
+}
+
+# Stop the jaeger container.
+minerx::jaeger::docker::stop()
+{
+  docker stop minerx-jaeger &>/dev/null && minerx::log::info "jaeger stopped successfully" || minerx::log::error "failed to stop jaeger"
+}
+
+# Restart the jaeger container.
+minerx::jaeger::docker::restart()
+{
+  docker restart minerx-jaeger &>/dev/null && minerx::log::info "jaeger restarted successfully" || minerx::log::error "failed to restart jaeger"
+}
+
 # Print necessary information after docker or sbs installation.
 minerx::jaeger::info()
 {

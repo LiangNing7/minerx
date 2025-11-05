@@ -42,6 +42,7 @@ require (
 	gorm.io/gorm v1.31.0
 	k8s.io/apimachinery v0.33.2
 	k8s.io/apiserver v0.33.2
+	k8s.io/client-go v0.33.2
 	k8s.io/code-generator v0.33.2
 	k8s.io/component-base v0.33.2
 	k8s.io/gengo v0.0.0-20250130153323-76c5745d3511
@@ -216,7 +217,6 @@ require (
 	gorm.io/hints v1.1.0 // indirect
 	gorm.io/plugin/dbresolver v1.6.2 // indirect
 	k8s.io/api v0.33.2 // indirect
-	k8s.io/client-go v0.33.2 // indirect
 	k8s.io/gengo/v2 v2.0.0-20250207200755-1244d31929d7 // indirect
 	modernc.org/libc v1.22.2 // indirect
 	modernc.org/mathutil v1.5.0 // indirect

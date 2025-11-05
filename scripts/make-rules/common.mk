@@ -128,7 +128,7 @@ MANIFESTS_DIR=$(PROJ_ROOT_DIR)/manifests
 SCRIPTS_DIR=$(PROJ_ROOT_DIR)/scripts
 
 # Image build releated variables.
-REGISTRY_PREFIX ?= ccr.ccs.tencentyun.com/minerxstack
+REGISTRY_PREFIX ?= ccr.ccs.tencentyun.com/LiangNing7
 GENERATED_DOCKERFILE_DIR=$(PROJ_ROOT_DIR)/build/docker
 
 # Kubernetes releated variables.

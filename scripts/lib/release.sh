@@ -10,7 +10,7 @@
 ###############################################################################
 
 # Tencent cos configuration
-readonly BUCKET="minerxstack-1254073058"
+readonly BUCKET="LiangNing7-1254073058"
 readonly REGION="ap-beijing"
 readonly COS_RELEASE_DIR="minerx-release"
 readonly COSTOOL="coscmd"
@@ -21,7 +21,7 @@ readonly RELEASE_TARS="${LOCAL_OUTPUT_ROOT}/release-tars"
 readonly RELEASE_IMAGES="${LOCAL_OUTPUT_ROOT}/release-images"
 
 # minerx github account info
-readonly MINERX_GITHUB_ORG=minerxstack
+readonly MINERX_GITHUB_ORG=LiangNing7
 readonly MINERX_GITHUB_REPO=minerx
 
 readonly ARTIFACT=minerx.tar.gz
@@ -422,10 +422,6 @@ EOF
   cp -R "${PROJ_ROOT_DIR}/scripts/release" "${release_stage}/"
   cat <<EOF > "${release_stage}/release/get-minerx-binaries.sh"
 #!/usr/bin/env bash
-
-# Copyright 2020 Lingfei Kong <colin404@foxmail.com>. All rights reserved.
-# Use of this source code is governed by a MIT style
-# license that can be found in the LICENSE file.
 
 # This file download minerx client and server binaries from tencent cos bucket.
 

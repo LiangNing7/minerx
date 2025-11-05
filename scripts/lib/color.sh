@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# Copyright 2022 Lingfei Kong <colin404@foxmail.com>. All rights reserved.
-# Use of this source code is governed by a MIT style
-# license that can be found in the LICENSE file. The original repo for
-# this file is https://github.com/minerxstack/minerx.
-#
-
 #Define color variables
 #Feature
 C_NORMAL='\033[0m';C_BOLD='\033[1m';C_DIM='\033[2m';C_UNDER='\033[4m';

@@ -1,9 +1,3 @@
-// Copyright 2022 Lingfei Kong <colin404@foxmail.com>. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file. The original repo for
-// this file is https://github.com/onexstack/onex.
-//
-
 package apps
 
 import (
@@ -187,17 +181,17 @@ type MinerSetDeletePolicy string
 
 const (
 	// RandomMinerSetDeletePolicy prioritizes both Miners that have the annotation
-	// "apps.onex.io/delete-miner=yes" and Miners that are unhealthy
+	// "apps.LiangNing7.io/delete-miner=yes" and Miners that are unhealthy
 	// (Status.ErrorReason or Status.ErrorMessage are set to a non-empty value).
 	// Finally, it picks Miners at random to delete.
 	RandomMinerSetDeletePolicy MinerSetDeletePolicy = "Random"
 	// NewestMinerSetDeletePolicy prioritizes both Miners that have the annotation
-	// "apps.onex.io/delete-miner=yes" and Miners that are unhealthy
+	// "apps.LiangNing7.io/delete-miner=yes" and Miners that are unhealthy
 	// (Status.ErrorReason or Status.ErrorMessage are set to a non-empty value).
 	// It then prioritizes the newest Miners for deletion based on the Miner's CreationTimestamp.
 	NewestMinerSetDeletePolicy MinerSetDeletePolicy = "Newest"
 	// OldestMinerSetDeletePolicy prioritizes both Miners that have the annotation
-	// "apps.onex.io/delete-miner=yes" and Miners that are unhealthy
+	// "apps.LiangNing7.io/delete-miner=yes" and Miners that are unhealthy
 	// (Status.ErrorReason or Status.ErrorMessage are set to a non-empty value).
 	// It then prioritizes the oldest Miners for deletion based on the Miner's CreationTimestamp.
 	OldestMinerSetDeletePolicy MinerSetDeletePolicy = "Oldest"

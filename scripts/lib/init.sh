@@ -36,7 +36,8 @@ source "${SCRIPTS_DIR}/lib/golang.sh"
 # most preferred version for a group should appear first
 # UPDATEME: New group need to update here.
 MINERX_AVAILABLE_GROUP_VERSIONS="${MINERX_AVAILABLE_GROUP_VERSIONS:-\
-apps/v1beta1
+apps/v1beta1 \
+batch/v1beta1 \
 }"
 
 # This emulates "readlink -f" which is not available on MacOS X.

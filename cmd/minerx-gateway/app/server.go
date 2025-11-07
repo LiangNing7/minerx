@@ -13,7 +13,7 @@ import (
 	"github.com/LiangNing7/minerx/internal/pkg/known"
 )
 
-const commandDesc = `The gateway server is the back-end portal server of onex. All 
+const commandDesc = `The gateway server is the back-end portal server of minerx. All 
 requests from the front-end will arrive at the gateway, requests will be uniformly processed 
 and distributed by the gateway.`
 

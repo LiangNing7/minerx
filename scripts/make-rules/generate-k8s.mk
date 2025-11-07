@@ -100,7 +100,7 @@ gen_prerelease_lifecycle: $(PRERELEASE_LIFECYCLE_GEN) $(META_DIR)/$(PRERELEASE_L
 	        -i "$$pkgs"                                                             \
 	        -O $(PRERELEASE_LIFECYCLE_BASENAME)                                     \
 			--output-base "${GOPATH}/src"                                           \
-			--go-header-file ${SCRIPTS_DIR}/boilerplate.go.txt                      \
+			--go-header-file ${SCRIPTS_DIR}/boilerplate/boilerplate.go.txt                      \
 	        "$$@";                                                                  \
 	fi
 
@@ -195,7 +195,7 @@ gen_deepcopy: $(DEEPCOPY_GEN) $(META_DIR)/$(DEEPCOPY_GEN_TODO) ## Generate deepc
 	        --bounding-dirs $(PRJ_SRC_PATH),"k8s.io/api"                \
 	        -O $(DEEPCOPY_BASENAME)                                     \
 			--output-base "${GOPATH}/src"                               \
-			--go-header-file ${SCRIPTS_DIR}/boilerplate.go.txt          \
+			--go-header-file ${SCRIPTS_DIR}/boilerplate/boilerplate.go.txt          \
 	        "$$@";                                                      \
 	fi
 
@@ -298,7 +298,7 @@ gen_defaulter: $(DEFAULTER_GEN) $(META_DIR)/$(DEFAULTER_GEN_TODO) ## Generate de
 	        --extra-peer-dirs $$(echo $(DEFAULTER_EXTRA_PEER_PKGS) | sed 's/ /,/g')  \
 	        -O $(DEFAULTER_BASENAME)                                                 \
 			--output-base "${GOPATH}/src"                                            \
-			--go-header-file ${SCRIPTS_DIR}/boilerplate.go.txt                 \
+			--go-header-file ${SCRIPTS_DIR}/boilerplate/boilerplate.go.txt                 \
 	        "$$@";                                                                   \
 	fi
 
@@ -412,7 +412,7 @@ gen_conversion: $(CONVERSION_GEN) $(META_DIR)/$(CONVERSION_GEN_TODO) ## Generate
 	        -i "$$pkgs"                                                                 \
 	        -O $(CONVERSION_BASENAME)                                                   \
 			--output-base "${GOPATH}/src"                                               \
-			--go-header-file ${SCRIPTS_DIR}/boilerplate.go.txt                          \
+			--go-header-file ${SCRIPTS_DIR}/boilerplate/boilerplate.go.txt                          \
 	        "$$@";                                                                      \
 	fi
 
@@ -500,7 +500,7 @@ gen_client: $(GEN_CLIENT) $(META_DIR)/$(GEN_CLIENT_TODO) ## Generate client-go g
 	        --input-base ""                                             \
 	        --output-package $(OUTPUT_PKG)/clientset                    \
           --output-base "${GOPATH}/src"                                 \
-          --go-header-file ${SCRIPTS_DIR}/boilerplate.go.txt            \
+          --go-header-file ${SCRIPTS_DIR}/boilerplate/boilerplate.go.txt            \
 	        "$$@";                                                      \
 			$(SCRIPTS_DIR)/fix-generated.sh;                            \
 			echo "Generating lister at $(OUTPUT_PKG)/lister";           \
@@ -511,7 +511,7 @@ gen_client: $(GEN_CLIENT) $(META_DIR)/$(GEN_CLIENT_TODO) ## Generate client-go g
           --included-types-overrides core/v1/Namespace,core/v1/ConfigMap,core/v1/Event,core/v1/Secret \
 	        --output-package $(OUTPUT_PKG)/listers                      \
           --output-base "${GOPATH}/src"                                 \
-          --go-header-file ${SCRIPTS_DIR}/boilerplate.go.txt            \
+          --go-header-file ${SCRIPTS_DIR}/boilerplate/boilerplate.go.txt            \
 	        "$$@";                                                      \
 			echo "Generating informer at $(OUTPUT_PKG)/informer";       \
 	    $(SCRIPTS_DIR)/run-in-gopath.sh informer-gen                    \
@@ -523,7 +523,7 @@ gen_client: $(GEN_CLIENT) $(META_DIR)/$(GEN_CLIENT_TODO) ## Generate client-go g
           --listers-package $(OUTPUT_PKG)/listers                       \
 	        --output-package $(OUTPUT_PKG)/informers                    \
           --output-base "${GOPATH}/src"                                 \
-          --go-header-file ${SCRIPTS_DIR}/boilerplate.go.txt            \
+          --go-header-file ${SCRIPTS_DIR}/boilerplate/boilerplate.go.txt            \
 	        "$$@";                                                      \
 	fi
 
@@ -612,7 +612,7 @@ gen_openapi: $(OPENAPI_GEN) $(META_DIR)/$(OPENAPI_GEN_TODO)
 	        --output-package $(OUTPUT_PKG)/openapi                      \
 	        -O $(OPENAPI_BASENAME)                                      \
 					--output-base "${GOPATH}/src"                       \
-					--go-header-file ${SCRIPTS_DIR}/boilerplate.go.txt  \
+					--go-header-file ${SCRIPTS_DIR}/boilerplate/boilerplate.go.txt  \
 	        "$$@";                                                      \
 	fi
 

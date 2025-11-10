@@ -36,6 +36,7 @@ type GenerateConfig struct {
 // 预定义的生成配置.
 var generateConfigs = map[string]GenerateConfig{
 	"uc": {ModelPackagePath: "internal/usercenter/model", GenerateFunc: GenerateUserCenterModels},
+	"gw": {ModelPackagePath: "internal/gateway/model", GenerateFunc: GenerateGatewayModels},
 }
 
 // 命令行参数.
@@ -157,6 +158,12 @@ func applyGeneratorOptions(g *gen.Generator) {
 func GenerateUserCenterModels(g *gen.Generator) {
 	g.GenerateModelAs("usercenter_user", "UserM")
 	g.GenerateModelAs("usercenter_secret", "SecretM")
+}
+
+func GenerateGatewayModels(g *gen.Generator) {
+	g.GenerateModelAs("gateway_chain", "ChainM")
+	g.GenerateModelAs("gateway_minerset", "MinerSetM")
+	g.GenerateModelAs("gateway_miner", "MinerM")
 }
 
 func rootDir() string {

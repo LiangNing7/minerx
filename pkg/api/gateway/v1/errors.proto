@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package gateway.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/LiangNing7/minerx/pkg/api/gateway/v1;v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  // 用户登录失败，可能是用户名或密码不对
+  UserLoginFailed = 0 [(errors.code) = 401];
+  // 用户已存在错误
+  UserAlreadyExists = 1 [(errors.code) = 409];
+  // 用户未找到错误
+  UserNotFound = 2 [(errors.code) = 404];
+  // 创建用户失败错误
+  UserCreateFailed = 3 [(errors.code) = 541];
+}
+

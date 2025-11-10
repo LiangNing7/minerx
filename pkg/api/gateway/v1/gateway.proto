@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package gateway.v1;
+
+import "google/api/annotations.proto";
+import "apps/v1beta1/generated.proto";
+import "gateway/v1/miner.proto";
+import "gateway/v1/minerset.proto";
+
+option go_package = "github.com/LiangNing7/minerx/pkg/api/gateway/v1;v1";
+
+// Peer lists  hubble peers and notifies of changes.
+service Gateway {
+  // GetVersion
+  rpc GetVersion(GetVersionRequest) returns (GetVersionResponse) {
+    option (google.api.http) = {get: "/version"};
+  }
+
+  // GetIdempotentToken
+  rpc GetIdempotentToken(IdempotentRequest) returns (IdempotentResponse) {
+    option (google.api.http) = {get: "/v1/idempotents"};
+  }
+
+  // CreateMinerSet
+  rpc CreateMinerSet(github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.MinerSet) returns (github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.MinerSet) {
+    option (google.api.http) = {
+      post: "/v1/minersets",
+      body: "*",
+    };
+  }
+
+  // UpdateMinerSet
+  rpc UpdateMinerSet(github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.MinerSet) returns (github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.MinerSet) {
+    option (google.api.http) = {
+      put: "/v1/minersets",
+      body: "*",
+    };
+  }
+
+  // DeleteMinerSet
+  rpc DeleteMinerSet(DeleteMinerSetRequest) returns (DeleteMinerSetResponse) {
+    option (google.api.http) = {delete: "/v1/minersets/{name}"};
+  }
+
+  // GetMinerSet
+  rpc GetMinerSet(GetMinerSetRequest) returns (github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.MinerSet) {
+    option (google.api.http) = {get: "/v1/minersets/{name}"};
+  }
+
+  // ListMinerSet
+  rpc ListMinerSet(ListMinerSetRequest) returns (ListMinerSetResponse) {
+    option (google.api.http) = {get: "/v1/minersets"};
+  }
+
+  // ScaleMinerSet
+  rpc ScaleMinerSet(ScaleMinerSetRequest) returns (ScaleMinerSetResponse) {
+    option (google.api.http) = {
+      put: "/v1/minersets/{name}/scale",
+      body: "*",
+    };
+  }
+
+  // CreateMiner
+  rpc CreateMiner(github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.Miner) returns (github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.Miner) {
+    option (google.api.http) = {
+      post: "/v1/miners",
+      body: "*",
+    };
+  }
+
+  // UpdateMiner
+  rpc UpdateMiner(github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.Miner) returns (github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.Miner) {
+    option (google.api.http) = {
+      put: "/v1/miners",
+      body: "*",
+    };
+  }
+
+  // DeleteMiner
+  rpc DeleteMiner(DeleteMinerRequest) returns (DeleteMinerResponse) {
+    option (google.api.http) = {delete: "/v1/miners/{name}"};
+  }
+
+  // GetMiner
+  rpc GetMiner(GetMinerRequest) returns (github.com.LiangNing7.minerx.pkg.apis.apps.v1beta1.Miner) {
+    option (google.api.http) = {get: "/v1/miners/{name}"};
+  }
+
+  // ListMiner
+  rpc ListMiner(ListMinerRequest) returns (ListMinerResponse) {
+    option (google.api.http) = {get: "/v1/miners"};
+  }
+}
+
+message IdempotentRequest {
+}
+
+message IdempotentResponse {
+  string token = 1;
+}
+
+message GetVersionRequest {
+}
+
+message GetVersionResponse {
+  string GitVersion = 1;
+  string GitCommit = 2;
+  string GitTreeState = 3;
+  string BuildDate = 4;
+  string GoVersion = 5; 
+  string Compiler = 6;
+  string Platform = 7;
+}
+

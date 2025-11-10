@@ -34,7 +34,7 @@ type Config struct {
 	JaegerOptions     *genericoptions.JaegerOptions
 	ConsulOptions     *genericoptions.ConsulOptions
 
-	// the rest config for the onex-apiserver
+	// the rest config for the minerx-apiserver
 	Kubeconfig *rest.Config
 }
 

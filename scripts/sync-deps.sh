@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Sync minerx deps to match versions used in onex
+# Sync minerx deps to match versions used in minerx
 
 cd "$(dirname "$0")/.."
 
@@ -31,7 +31,7 @@ mods=(
   "github.com/armon/go-socks5@v0.0.0-20160902184237-e75332964ef5"
 )
 
-echo "Syncing dependencies to onex-aligned versions..."
+echo "Syncing dependencies to minerx-aligned versions..."
 for m in "${mods[@]}"; do
   echo "go get $m"
   go get "$m"

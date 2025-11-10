@@ -14,7 +14,7 @@ function minerx::install::install_cfssl()
   #wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O $HOME/bin/cfssljson
   #wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O $HOME/bin/cfssl-certinfo
   chmod +x $HOME/bin/{cfssl,cfssljson,cfssl-certinfo}
-  onex::log::info "install cfssl tools successfully"
+  minerx::log::info "install cfssl tools successfully"
 }   
 
 if [[ "$*" =~ minerx::install:: ]]; then

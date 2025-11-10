@@ -11,7 +11,7 @@ import (
 )
 
 // secretSetter is an implementation of the
-// `github.com/onexstack/onex/internal/usercenter/pkg/auth.TemporarySecretSetter` interface. It used to set
+// `github.com/LiangNing7/minerx/internal/usercenter/pkg/auth.TemporarySecretSetter` interface. It used to set
 // a temporary key for a user. Each user has only one temporary key.
 type secretSetter struct {
 	store *datastore

@@ -1,6 +1,6 @@
 package store
 
-//go:generate mockgen -destination mock_store.go -package store github.com/LiangNing7/minerx/internal/gateway/store IStore
+//go:generate mockgen -destination mock_store.go -package store github.com/LiangNing7/minerx/internal/gateway/store IStore,ChainStore,MinerSetStore,MinerStore
 
 import (
 	"context"
@@ -30,6 +30,12 @@ type IStore interface {
 	DB(ctx context.Context, wheres ...where.Where) *gorm.DB
 	// TX is used to implement transactions in the Biz layer.
 	TX(ctx context.Context, fn func(ctx context.Context) error) error
+	// Chain returns an implementation of the ChainStore.
+	Chain() ChainStore
+	// MinerSet returns an implementation of the MinerSetStore.
+	MinerSet() MinerSetStore
+	// Miner returns an implementation of the MinerStore.
+	Miner() MinerStore
 }
 
 // transactionKey is the key used to store transaction context in context.Context.
@@ -87,4 +93,19 @@ func (store *datastore) TX(ctx context.Context, fn func(ctx context.Context) err
 			return fn(ctx)
 		},
 	)
+}
+
+// Chain returns an instance that implements the ChainStore.
+func (store *datastore) Chain() ChainStore {
+	return newChainStore(store)
+}
+
+// MinerSet returns an instance that implements the MinerSetStore.
+func (store *datastore) MinerSet() MinerSetStore {
+	return newMinerSetStore(store)
+}
+
+// Miner returns an instance that implements the MinerStore.
+func (store *datastore) Miner() MinerStore {
+	return newMinerStore(store)
 }

@@ -32,7 +32,7 @@ func ChargeRequest(name, namespace string) *ChargeRequestApplyConfiguration {
 	b.WithName(name)
 	b.WithNamespace(namespace)
 	b.WithKind("ChargeRequest")
-	b.WithAPIVersion("apps.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("apps.liangning7.cn/v1beta1")
 	return b
 }
 
@@ -68,7 +68,7 @@ func extractChargeRequest(chargeRequest *appsv1beta1.ChargeRequest, fieldManager
 	b.WithNamespace(chargeRequest.Namespace)
 
 	b.WithKind("ChargeRequest")
-	b.WithAPIVersion("apps.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("apps.liangning7.cn/v1beta1")
 	return b, nil
 }
 

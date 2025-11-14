@@ -10,7 +10,7 @@ import (
 const (
 	// MinerFinalizer is the finalizer used by the Miner controller to
 	// clean up referenced template resources if necessary when a Miner is being deleted.
-	MinerFinalizer = "miner.LiangNing7.io/finalizer"
+	MinerFinalizer = "miner.liangning7.cn/finalizer"
 )
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

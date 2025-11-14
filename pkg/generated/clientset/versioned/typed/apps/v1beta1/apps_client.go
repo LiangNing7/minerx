@@ -23,7 +23,7 @@ type AppsV1beta1Interface interface {
 	MinerSetsGetter
 }
 
-// AppsV1beta1Client is used to interact with features provided by the apps.LiangNing7.io group.
+// AppsV1beta1Client is used to interact with features provided by the apps.liangning7.cn group.
 type AppsV1beta1Client struct {
 	restClient rest.Interface
 }

@@ -3,5 +3,5 @@ package apps
 const (
 	// AnnotationDeletionProtection is the key for the annotation used to enable deletion protection for resources.
 	// When this annotation is present on a resource, the resource should not be deleted unless the annotation is removed.
-	AnnotationDeletionProtection = "apps.LiangNing7.io/deletion-protection"
+	AnnotationDeletionProtection = "apps.liangning7.cn/deletion-protection"
 )

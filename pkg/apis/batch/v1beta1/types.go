@@ -24,7 +24,7 @@ import (
 
 const (
 	// All Kubernetes labels need to be prefixed with Kubernetes to distinguish them from end-user labels
-	labelPrefix = "batch.LiangNing7.io/"
+	labelPrefix = "batch.liangning7.cn/"
 
 	// CronJobScheduledTimestampAnnotation is the scheduled timestamp annotation for the Job.
 	// It records the original/expected scheduled timestamp for the running job, represented in RFC3339.

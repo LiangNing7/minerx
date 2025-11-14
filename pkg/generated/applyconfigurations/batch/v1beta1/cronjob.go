@@ -32,7 +32,7 @@ func CronJob(name, namespace string) *CronJobApplyConfiguration {
 	b.WithName(name)
 	b.WithNamespace(namespace)
 	b.WithKind("CronJob")
-	b.WithAPIVersion("batch.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("batch.liangning7.cn/v1beta1")
 	return b
 }
 
@@ -68,7 +68,7 @@ func extractCronJob(cronJob *batchv1beta1.CronJob, fieldManager string, subresou
 	b.WithNamespace(cronJob.Namespace)
 
 	b.WithKind("CronJob")
-	b.WithAPIVersion("batch.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("batch.liangning7.cn/v1beta1")
 	return b, nil
 }
 

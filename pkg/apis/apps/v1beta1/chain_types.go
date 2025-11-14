@@ -7,7 +7,7 @@ import (
 const (
 	// ChainFinalizer is the finalizer used by the Chain controller to
 	// clean up referenced template resources if necessary when a Chain is being deleted.
-	ChainFinalizer = "chain.LiangNing7.io/finalizer"
+	ChainFinalizer = "chain.liangning7.cn/finalizer"
 )
 
 // +genclient

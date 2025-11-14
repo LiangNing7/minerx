@@ -32,7 +32,7 @@ func MinerSet(name, namespace string) *MinerSetApplyConfiguration {
 	b.WithName(name)
 	b.WithNamespace(namespace)
 	b.WithKind("MinerSet")
-	b.WithAPIVersion("apps.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("apps.liangning7.cn/v1beta1")
 	return b
 }
 
@@ -68,7 +68,7 @@ func extractMinerSet(minerSet *appsv1beta1.MinerSet, fieldManager string, subres
 	b.WithNamespace(minerSet.Namespace)
 
 	b.WithKind("MinerSet")
-	b.WithAPIVersion("apps.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("apps.liangning7.cn/v1beta1")
 	return b, nil
 }
 

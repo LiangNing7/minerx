@@ -290,7 +290,7 @@ function minerx::util::gv-to-swagger-name() {
 # repo, e.g. "upstream" or "origin".
 function minerx::util::git_upstream_remote_name() {
   git remote -v | grep fetch |\
-    grep -E 'github.com[/:]LiangNing7/minerx|LiangNing7.io/minerx' |\
+    grep -E 'github.com[/:]LiangNing7/minerx|liangning7.cn/minerx' |\
     head -n 1 | awk '{print $1}'
 }
 

@@ -2,51 +2,51 @@ package v1beta1
 
 const (
 	// ChainNameLabel is the label set on miners linked to a chain.
-	ChainNameLabel = "apps.LiangNing7.io/chain-name"
+	ChainNameLabel = "apps.liangning7.cn/chain-name"
 
 	// MinerSetNameLabel is the label set on miners linked to a minerset.
-	MinerSetNameLabel = "apps.LiangNing7.io/minerset-name"
+	MinerSetNameLabel = "apps.liangning7.cn/minerset-name"
 
 	// MinerDeploymentNameLabel is the label set on miners if they're controlled by MinerDeployment.
-	MinerDeploymentNameLabel = "apps.LiangNing7.io/deployment-name"
+	MinerDeploymentNameLabel = "apps.liangning7.cn/deployment-name"
 
 	// MinerNamespaceAnnotation is the annotation set on pods identifying the namespace of the miner the pod belongs to.
-	MinerNamespaceAnnotation = "apps.LiangNing7.io/miner-namespace"
+	MinerNamespaceAnnotation = "apps.liangning7.cn/miner-namespace"
 
 	// MinerAnnotation is the annotation set on pods identifying the miner the pod belongs to.
-	MinerAnnotation = "apps.LiangNing7.io/miner"
+	MinerAnnotation = "apps.liangning7.cn/miner"
 
 	// OwnerKindAnnotation is the annotation set on pods identifying the owner kind.
-	OwnerKindAnnotation = "apps.LiangNing7.io/owner-kind"
+	OwnerKindAnnotation = "apps.liangning7.cn/owner-kind"
 
 	// OwnerNameAnnotation is the annotation set on pods identifying the owner name.
-	OwnerNameAnnotation = "apps.LiangNing7.io/owner-name"
+	OwnerNameAnnotation = "apps.liangning7.cn/owner-name"
 
 	// DisableMinerCreate is an annotation that can be used to signal a MinerSet to stop creating new miners.
 	// It is utilized in the OnDelete MinerSetStrategy to allow the MinerSet controller to scale down
 	// older MinerSets when Miners are deleted and add the new replicas to the latest MinerSet.
-	DisableMinerCreateAnnotation = "apps.LiangNing7.io/disable-miner-create"
+	DisableMinerCreateAnnotation = "apps.liangning7.cn/disable-miner-create"
 
 	// DeleteMinerAnnotation marks control plane and worker nodes that will be given priority for deletion
 	// when KCP or a minerset scales down. This annotation is given top priority on all delete policies.
-	DeleteMinerAnnotation = "apps.LiangNing7.io/delete-miner"
+	DeleteMinerAnnotation = "apps.liangning7.cn/delete-miner"
 
 	// WatchLabel is a label othat can be applied to any MinerX API object.
 	//
 	// Controllers which allow for selective reconciliation may check this label and proceed
 	// with reconciliation of the object only if this label and a configured value is present.
-	WatchLabel = "apps.LiangNing7.io/watch-filter"
+	WatchLabel = "apps.liangning7.cn/watch-filter"
 
 	// PausedAnnotation is an annotation that can be applied to any MinerX API
 	// object to prevent a controller from processing a resource.
 	//
 	// Controllers working with MinerX objects must check the existence of this annotation
 	// on the reconciled object.
-	PausedAnnotation = "apps.LiangNing7.io/paused"
+	PausedAnnotation = "apps.liangning7.cn/paused"
 
 	// MinerSkipRemediationAnnotation is the annotation used to mark the miners
 	// that should not be considered for remediation by MinerHealthCheck reconciler.
-	MinerSkipRemediationAnnotation = "apps.LiangNing7.io/skip-remediation"
+	MinerSkipRemediationAnnotation = "apps.liangning7.cn/skip-remediation"
 )
 
 // MinerAddressType describes a valid MinerAddress type.

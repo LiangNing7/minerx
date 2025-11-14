@@ -2,12 +2,12 @@ package known
 
 const (
 	// This exposes compute information based on the miner type.
-	CPUAnnotation    = "apps.LiangNing7.io/vCPU"
-	MemoryAnnotation = "apps.LiangNing7.io/memoryMb"
+	CPUAnnotation    = "apps.liangning7.cn/vCPU"
+	MemoryAnnotation = "apps.liangning7.cn/memoryMb"
 )
 
 const (
-	SkipVerifyAnnotation = "apps.LiangNing7.io/skip-verify"
+	SkipVerifyAnnotation = "apps.liangning7.cn/skip-verify"
 )
 
 var AllImmutableAnnotations = []string{

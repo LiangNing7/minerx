@@ -21,7 +21,7 @@ type BatchV1beta1Interface interface {
 	JobsGetter
 }
 
-// BatchV1beta1Client is used to interact with features provided by the batch.LiangNing7.io group.
+// BatchV1beta1Client is used to interact with features provided by the batch.liangning7.cn group.
 type BatchV1beta1Client struct {
 	restClient rest.Interface
 }

@@ -32,7 +32,7 @@ func Chain(name, namespace string) *ChainApplyConfiguration {
 	b.WithName(name)
 	b.WithNamespace(namespace)
 	b.WithKind("Chain")
-	b.WithAPIVersion("apps.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("apps.liangning7.cn/v1beta1")
 	return b
 }
 
@@ -68,7 +68,7 @@ func extractChain(chain *appsv1beta1.Chain, fieldManager string, subresource str
 	b.WithNamespace(chain.Namespace)
 
 	b.WithKind("Chain")
-	b.WithAPIVersion("apps.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("apps.liangning7.cn/v1beta1")
 	return b, nil
 }
 

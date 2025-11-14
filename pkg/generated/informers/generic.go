@@ -50,7 +50,7 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 	case v1.SchemeGroupVersion.WithResource("customresourcedefinitions"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Apiextensions().V1().CustomResourceDefinitions().Informer()}, nil
 
-		// Group=apps.LiangNing7.io, Version=v1beta1
+		// Group=apps.liangning7.cn, Version=v1beta1
 	case v1beta1.SchemeGroupVersion.WithResource("chains"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V1beta1().Chains().Informer()}, nil
 	case v1beta1.SchemeGroupVersion.WithResource("chargerequests"):
@@ -60,7 +60,7 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 	case v1beta1.SchemeGroupVersion.WithResource("minersets"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V1beta1().MinerSets().Informer()}, nil
 
-		// Group=batch.LiangNing7.io, Version=v1beta1
+		// Group=batch.liangning7.cn, Version=v1beta1
 	case batchv1beta1.SchemeGroupVersion.WithResource("cronjobs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Batch().V1beta1().CronJobs().Informer()}, nil
 	case batchv1beta1.SchemeGroupVersion.WithResource("jobs"):

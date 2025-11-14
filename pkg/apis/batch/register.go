@@ -13,7 +13,7 @@ var (
 )
 
 // GroupName is the group name use in this package.
-const GroupName = "batch.LiangNing7.io"
+const GroupName = "batch.liangning7.cn"
 
 // SchemeGroupVersion is group version used to register these objects.
 var SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: runtime.APIVersionInternal}

@@ -73,7 +73,7 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 	case v1.SchemeGroupVersion.WithKind("WebhookConversion"):
 		return &apiextensionsv1.WebhookConversionApplyConfiguration{}
 
-		// Group=apps.LiangNing7.io, Version=v1beta1
+		// Group=apps.liangning7.cn, Version=v1beta1
 	case v1beta1.SchemeGroupVersion.WithKind("Chain"):
 		return &appsv1beta1.ChainApplyConfiguration{}
 	case v1beta1.SchemeGroupVersion.WithKind("ChainSpec"):
@@ -125,7 +125,7 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 	case autoscalingv1.SchemeGroupVersion.WithKind("ScaleStatus"):
 		return &applyconfigurationsautoscalingv1.ScaleStatusApplyConfiguration{}
 
-		// Group=batch.LiangNing7.io, Version=v1beta1
+		// Group=batch.liangning7.cn, Version=v1beta1
 	case batchv1beta1.SchemeGroupVersion.WithKind("CronJob"):
 		return &applyconfigurationsbatchv1beta1.CronJobApplyConfiguration{}
 	case batchv1beta1.SchemeGroupVersion.WithKind("CronJobSpec"):

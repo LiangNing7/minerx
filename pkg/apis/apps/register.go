@@ -14,7 +14,7 @@ var (
 )
 
 // GroupName is the group name use in this package.
-const GroupName = "apps.LiangNing7.io"
+const GroupName = "apps.liangning7.cn"
 
 // SchemeGroupVersion is group version used to register.
 var SchemeGroupVersion = schema.GroupVersion{

@@ -6,7 +6,7 @@
 // +k8s:conversion-gen=k8s.io/kubernetes/pkg/apis/core
 // +k8s:conversion-gen-external-types=github.com/LiangNing7/minerx/pkg/apis/apps/v1beta1
 // +k8s:defaulter-gen=TypeMeta
-// +groupName=apps.LiangNing7.io
+// +groupName=apps.liangning7.cn
 
 // Package v1beta1 is the v1beta1 version of the API.
 package v1beta1 // import "github.com/LiangNing7/minerx/pkg/apis/apps/v1beta1"

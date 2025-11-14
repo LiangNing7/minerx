@@ -2,22 +2,22 @@ package apps
 
 const (
 	// MinerAnnotation is the annotation set on pods identifying the miner the pod belongs to.
-	MinerAnnotation = "apps.LiangNing7.io/miner"
+	MinerAnnotation = "apps.liangning7.cn/miner"
 
 	// OwnerKindAnnotation is the annotation set on pods identifying the owner kind.
-	OwnerKindAnnotation = "apps.LiangNing7.io/owner-kind"
+	OwnerKindAnnotation = "apps.liangning7.cn/owner-kind"
 
 	// OwnerNameAnnotation is the annotation set on pods identifying the owner name.
-	OwnerNameAnnotation = "apps.LiangNing7.io/owner-name"
+	OwnerNameAnnotation = "apps.liangning7.cn/owner-name"
 
 	// DisableMinerCreate is an annotation that can be used to signal a MinerSet to stop creating new miners.
 	// It is utilized in the OnDelete MinerSetStrategy to allow the MinerSet controller to scale down
 	// older MinerSets when Miners are deleted and add the new replicas to the latest MinerSet.
-	DisableMinerCreate = "apps.LiangNing7.io/disable-miner-create"
+	DisableMinerCreate = "apps.liangning7.cn/disable-miner-create"
 
 	// DeleteMinerAnnotation marks control plane and worker nodes that will be given priority for deletion
 	// when KCP or a minerset scales down. This annotation is given top priority on all delete policies.
-	DeleteMinerAnnotation = "apps.LiangNing7.io/delete-miner"
+	DeleteMinerAnnotation = "apps.liangning7.cn/delete-miner"
 )
 
 // MinerAddressType describes a valid MinerAddress type.

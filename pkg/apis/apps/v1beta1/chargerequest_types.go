@@ -7,7 +7,7 @@ import (
 const (
 	// ChargeRequestFinalizer is the finalizer used by the ChargeRequest controller to
 	// clean up referenced template resources if necessary when a ChargeRequest is being deleted.
-	ChargeRequestFinalizer = "chargerequest.LiangNing7.io/finalizer"
+	ChargeRequestFinalizer = "chargerequest.liangning7.cn/finalizer"
 )
 
 // +genclient

@@ -5,7 +5,7 @@
 // +k8s:conversion-gen-external-types=github.com/LiangNing7/minerx/pkg/apis/batch/v1beta1
 // +k8s:defaulter-gen=TypeMeta
 // +k8s:defaulter-gen-input=github.com/LiangNing7/minerx/pkg/apis/batch/v1beta1
-// +groupName=batch.LiangNing7.io
+// +groupName=batch.liangning7.cn
 
 // Package v1beta1 is the v1beta1 version of the API.
 package v1beta1 // import "github.com/LiangNing7/minerx/pkg/apis/batch/v1beta1"

@@ -12,7 +12,7 @@ import (
 const (
 	// MinerSetFinalizer is the finalizer used by the MinerSet controller to
 	// clean up referenced template resources if necessary when a MinerSet is being deleted.
-	MinerSetFinalizer = "minerset.LiangNing7.io/finalizer"
+	MinerSetFinalizer = "minerset.liangning7.cn/finalizer"
 )
 
 // +genclient
@@ -188,17 +188,17 @@ type MinerSetDeletePolicy string
 
 const (
 	// RandomMinerSetDeletePolicy prioritizes both Miners that have the annotation
-	// "apps.LiangNing7.io/delete-miner=yes" and Miners that are unhealthy
+	// "apps.liangning7.cn/delete-miner=yes" and Miners that are unhealthy
 	// (Status.ErrorReason or Status.ErrorMessage are set to a non-empty value).
 	// Finally, it picks Miners at random to delete.
 	RandomMinerSetDeletePolicy MinerSetDeletePolicy = "Random"
 	// NewestMinerSetDeletePolicy prioritizes both Miners that have the annotation
-	// "apps.LiangNing7.io/delete-miner=yes" and Miners that are unhealthy
+	// "apps.liangning7.cn/delete-miner=yes" and Miners that are unhealthy
 	// (Status.ErrorReason or Status.ErrorMessage are set to a non-empty value).
 	// It then prioritizes the newest Miners for deletion based on the Miner's CreationTimestamp.
 	NewestMinerSetDeletePolicy MinerSetDeletePolicy = "Newest"
 	// OldestMinerSetDeletePolicy prioritizes both Miners that have the annotation
-	// "apps.LiangNing7.io/delete-miner=yes" and Miners that are unhealthy
+	// "apps.liangning7.cn/delete-miner=yes" and Miners that are unhealthy
 	// (Status.ErrorReason or Status.ErrorMessage are set to a non-empty value).
 	// It then prioritizes the oldest Miners for deletion based on the Miner's CreationTimestamp.
 	OldestMinerSetDeletePolicy MinerSetDeletePolicy = "Oldest"

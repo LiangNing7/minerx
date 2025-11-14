@@ -32,7 +32,7 @@ func Job(name, namespace string) *JobApplyConfiguration {
 	b.WithName(name)
 	b.WithNamespace(namespace)
 	b.WithKind("Job")
-	b.WithAPIVersion("batch.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("batch.liangning7.cn/v1beta1")
 	return b
 }
 
@@ -68,7 +68,7 @@ func extractJob(job *batchv1beta1.Job, fieldManager string, subresource string) 
 	b.WithNamespace(job.Namespace)
 
 	b.WithKind("Job")
-	b.WithAPIVersion("batch.LiangNing7.io/v1beta1")
+	b.WithAPIVersion("batch.liangning7.cn/v1beta1")
 	return b, nil
 }
 

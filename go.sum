@@ -1183,6 +1183,8 @@ gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c/go.mod h1:JHkPIbrfpd72SG/EV
 gopkg.in/errgo.v2 v2.1.0/go.mod h1:hNsd1EY+bozCKY1Ytp96fpM3vjJbqLJn88ws8XvfDNI=
 gopkg.in/evanphx/json-patch.v4 v4.13.0 h1:czT3CmqEaQ1aanPc5SdlgQrrEIb8w/wwCvWWnfEbYzo=
 gopkg.in/evanphx/json-patch.v4 v4.13.0/go.mod h1:p8EYWUEYMpynmqDbY58zCKCFZw8pRWMG4EsWvDvM72M=
+gopkg.in/go-jose/go-jose.v2 v2.6.3 h1:nt80fvSDlhKWQgSWyHyy5CfmlQr+asih51R8PTWNKKs=
+gopkg.in/go-jose/go-jose.v2 v2.6.3/go.mod h1:zzZDPkNNw/c9IE7Z9jr11mBZQhKQTMzoEEIoEdZlFBI=
 gopkg.in/inf.v0 v0.9.1 h1:73M5CoZyi3ZLMOyDlQh031Cx6N9NDJ2Vvfl76EDAgDc=
 gopkg.in/inf.v0 v0.9.1/go.mod h1:cWUDdTG/fYaXco+Dcufb5Vnc6Gp2YChqWtbxRZE0mXw=
 gopkg.in/natefinch/lumberjack.v2 v2.2.1 h1:bBRl1b0OH9s/DuPhuXpNl+VtCaJXFZ5/uEFST95x9zc=
@@ -1248,6 +1250,8 @@ k8s.io/component-helpers v0.33.2 h1:AjCtYzst11NV8ensxV/2LEEXRwctqS7Bs44bje9Qcnw=
 k8s.io/component-helpers v0.33.2/go.mod h1:PsPpiCk74n8pGWp1d6kjK/iSKBTyQfIacv02BNkMenU=
 k8s.io/controller-manager v0.33.2 h1:HIs8PbdTOaY6wTOvKKLwoAHSO6GeDjmYS0Gjnd6rF+c=
 k8s.io/controller-manager v0.33.2/go.mod h1:n8maAdN06E3cD0h5N0wuYBv9Qi9FePl7y6Iz3pfc9PY=
+k8s.io/endpointslice v0.33.2 h1:NXMelDCN7p17EawwO5A2wYQxVzsWNTHrIaEbEw5jCuw=
+k8s.io/endpointslice v0.33.2/go.mod h1:I5ALo6wXztY28NBtw5WNvn/j5LuHYerknIwc4wtjJuU=
 k8s.io/gengo v0.0.0-20250130153323-76c5745d3511 h1:4eL6zr5VCj71nu2nOuQ6j6m/kqh5WueXBN8daZkNe90=
 k8s.io/gengo v0.0.0-20250130153323-76c5745d3511/go.mod h1:FiNAH4ZV3gBg2Kwh89tzAEV2be7d5xI0vBa/VySYy3E=
 k8s.io/gengo/v2 v2.0.0-20250604051438-85fd79dbfd9f h1:SLb+kxmzfA87x4E4brQzB33VBbT2+x7Zq9ROIHmGn9Q=

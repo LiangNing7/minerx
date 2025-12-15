@@ -232,6 +232,7 @@ require (
 	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251111163417-95abcf5c77ba // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.13.0 // indirect
+	gopkg.in/go-jose/go-jose.v2 v2.6.3 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
@@ -244,6 +245,7 @@ require (
 	gorm.io/plugin/dbresolver v1.6.2 // indirect
 	k8s.io/component-helpers v0.0.0 // indirect
 	k8s.io/controller-manager v0.0.0 // indirect
+	k8s.io/endpointslice v0.0.0 // indirect
 	k8s.io/gengo/v2 v2.0.0-20250604051438-85fd79dbfd9f // indirect
 	k8s.io/kms v0.33.2 // indirect
 	k8s.io/kubelet v0.0.0 // indirect

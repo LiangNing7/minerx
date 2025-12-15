@@ -46,7 +46,7 @@ const (
 	repairLoopInterval = 3 * time.Minute
 )
 
-// Extra defines extra configuration for the onex-apiserver.
+// Extra defines extra configuration for the minerx-apiserver.
 type Extra struct {
 	// Place you custom config here.
 	APIResourceConfigSource serverstorage.APIResourceConfigSource
@@ -74,7 +74,7 @@ type Extra struct {
 	ExternalPostStartHooks     map[string]genericapiserver.PostStartHookFunc
 }
 
-// Config defines configuration for the onex-apiserver.
+// Config defines configuration for the minerx-apiserver.
 type Config struct {
 	Generic *genericapiserver.RecommendedConfig
 	Extra
@@ -90,7 +90,7 @@ type CompletedConfig struct {
 	*completedConfig
 }
 
-// Instance contains state for a onex-apiserver instance.
+// Instance contains state for a minerx-apiserver instance.
 type Instance struct {
 	GenericAPIServer *genericapiserver.GenericAPIServer
 
@@ -108,7 +108,7 @@ func (c *Config) Complete() CompletedConfig {
 // New returns a new instance of APIServer from the given config.
 // Certain config fields will be set to a default value if unset.
 func (c completedConfig) New(delegationTarget genericapiserver.DelegationTarget) (*Instance, error) {
-	s, err := c.Generic.New("onex-apiserver", delegationTarget)
+	s, err := c.Generic.New("minerx-apiserver", delegationTarget)
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +127,7 @@ func (c completedConfig) New(delegationTarget genericapiserver.DelegationTarget)
 		return nil, err
 	}
 
-	// Install onex legacy rest storage
+	// Install minerx legacy rest storage
 	// This part of the code is different from kube-apiserver because
 	// we do not need to install all kube-apiserver legacy APIs.
 	if err := m.InstallLegacyAPI(&c, c.Generic.RESTOptionsGetter); err != nil {
@@ -157,7 +157,7 @@ func (c completedConfig) New(delegationTarget genericapiserver.DelegationTarget)
 	})
 
 	// Here, I removed unused kube-apiserver post start hooks and
-	// add post start hooks which onex-apiserver needs
+	// add post start hooks which minerx-apiserver needs
 
 	// TODO: copy from kube-apiserver
 	m.GenericAPIServer.AddPostStartHookOrDie(

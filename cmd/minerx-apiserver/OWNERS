@@ -1,0 +1,11 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - LiangNing7
+reviewers:
+  - LiangNing7
+labels:
+  - liangning7.cn/cmd
+emeritus_approvers:
+  - LiangNing7
+

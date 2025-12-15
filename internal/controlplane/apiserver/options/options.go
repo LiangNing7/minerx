@@ -142,7 +142,7 @@ func (o *Options) AddFlags(fss *cliflag.NamedFlagSets) {
 	// Note: the weird ""+ in below lines seems to be the only way to get gofmt to
 	// arrange these text blocks sensibly. Grrr.
 	fs := fss.FlagSet("misc")
-	fs.StringSliceVar(&o.AlternateDNS, "alternate-dns", o.AlternateDNS, "Specify an alternate DNS to use (e.g. 'onex.io').")
+	fs.StringSliceVar(&o.AlternateDNS, "alternate-dns", o.AlternateDNS, "Specify an alternate DNS to use (e.g. 'liangning7.cn').")
 	fs.DurationVar(&o.EventTTL, "event-ttl", o.EventTTL, "Amount of time to retain events.")
 
 	fs.BoolVar(&o.EnableLogsHandler, "enable-logs-handler", o.EnableLogsHandler,

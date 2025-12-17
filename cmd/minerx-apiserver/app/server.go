@@ -1,0 +1,386 @@
+package app
+
+import (
+	"context"
+	"crypto/tls"
+	"fmt"
+	"net/http"
+	"net/url"
+	"os"
+
+	"github.com/spf13/cobra"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	extensionsapiserver "k8s.io/apiextensions-apiserver/pkg/apiserver"
+	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/runtime/schema"
+	utilerrors "k8s.io/apimachinery/pkg/util/errors"
+	utilnet "k8s.io/apimachinery/pkg/util/net"
+	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
+	"k8s.io/apiserver/pkg/admission"
+	genericapifilters "k8s.io/apiserver/pkg/endpoints/filters"
+	"k8s.io/apiserver/pkg/reconcilers"
+	genericapiserver "k8s.io/apiserver/pkg/server"
+	genericoptions "k8s.io/apiserver/pkg/server/options"
+	serverstorage "k8s.io/apiserver/pkg/server/storage"
+	"k8s.io/apiserver/pkg/storage/storagebackend"
+	utilfeature "k8s.io/apiserver/pkg/util/feature"
+	"k8s.io/apiserver/pkg/util/notfoundhandler"
+	"k8s.io/apiserver/pkg/util/webhook"
+	kubeinformers "k8s.io/client-go/informers"
+	"k8s.io/client-go/rest"
+	cliflag "k8s.io/component-base/cli/flag"
+	"k8s.io/component-base/cli/globalflag"
+	"k8s.io/component-base/logs"
+	logsapi "k8s.io/component-base/logs/api/v1"
+	"k8s.io/component-base/term"
+	"k8s.io/klog/v2"
+	aggregatorapiserver "k8s.io/kube-aggregator/pkg/apiserver"
+	aggregatorscheme "k8s.io/kube-aggregator/pkg/apiserver/scheme"
+	"k8s.io/kube-openapi/pkg/common"
+	"k8s.io/kubernetes/pkg/api/legacyscheme"
+	api "k8s.io/kubernetes/pkg/apis/core"
+	"k8s.io/kubernetes/pkg/features"
+
+	"github.com/LiangNing7/goutils/pkg/version"
+	"github.com/LiangNing7/minerx/cmd/minerx-apiserver/app/options"
+	"github.com/LiangNing7/minerx/internal/controlplane"
+	"github.com/LiangNing7/minerx/internal/controlplane/apiserver"
+	controlplaneapiserver "github.com/LiangNing7/minerx/internal/controlplane/apiserver"
+	"github.com/LiangNing7/minerx/pkg/apiserver/storage"
+)
+
+func init() {
+	utilruntime.Must(logsapi.AddFeatureGates(utilfeature.DefaultMutableFeatureGate))
+}
+
+type (
+	Option       func(*options.ServerRunOptions)
+	RegisterFunc func(plugins *admission.Plugins)
+)
+
+// WithLegacyCode returns an Option that sets the external group versions in the ServerRunOptions.
+func WithEtcdOptions(prefix string, versions ...schema.GroupVersion) Option {
+	return func(s *options.ServerRunOptions) {
+		codec := legacyscheme.Codecs.LegacyCodec(versions...)
+		s.RecommendedOptions.Etcd = genericoptions.NewEtcdOptions(storagebackend.NewDefaultConfig(prefix, codec))
+		// Note: DefaultStorageMediaType needs to be reset here.
+		s.RecommendedOptions.Etcd.DefaultStorageMediaType = "application/vnd.kubernetes.protobuf"
+		/*
+			s.RecommendedOptions.Etcd.StorageConfig.EncodeVersioner = runtime.NewMultiGroupVersioner(
+				v1beta1.SchemeGroupVersion,
+				schema.GroupKind{Group: v1beta1.GroupName},
+			)
+		*/
+		for _, version := range versions {
+			controlplane.AddStableAPIGroupVersionsEnabledByDefault(version)
+		}
+	}
+}
+
+// WithAdmissionPlugin returns an Option function that adds an admission plugin to the recommended plugin order list
+// and registers the plugin using the provided RegisterFunc in the ServerRunOptions.
+func WithAdmissionPlugin(name string, registerFunc RegisterFunc) Option {
+	return func(s *options.ServerRunOptions) {
+		// Note: Need to add this to the RecommendedPluginOrder list.
+		s.RecommendedOptions.Admission.RecommendedPluginOrder = append(s.RecommendedOptions.Admission.RecommendedPluginOrder, name)
+		registerFunc(s.RecommendedOptions.Admission.Plugins)
+	}
+}
+
+// WithOpenAPIDefinitions sets the OpenAPI definitions for the server.
+func WithGetOpenAPIDefinitions(getOpenAPIDefinitions common.GetOpenAPIDefinitions) Option {
+	return func(s *options.ServerRunOptions) {
+		s.GetOpenAPIDefinitions = getOpenAPIDefinitions
+	}
+}
+
+// WithAdmissionInitializers returns an Option function that sets the external admission initializers in the ServerRunOptions.
+func WithAdmissionInitializers(initializer func(c *genericapiserver.RecommendedConfig) ([]admission.PluginInitializer, error)) Option {
+	return func(s *options.ServerRunOptions) {
+		s.RecommendedOptions.ExternalAdmissionInitializers = initializer
+	}
+}
+
+// WithPostStartHook returns an Option function that sets the external post-start hook with the given name in the ServerRunOptions.
+func WithPostStartHook(name string, hook genericapiserver.PostStartHookFunc) Option {
+	return func(s *options.ServerRunOptions) {
+		s.ExternalPostStartHooks[name] = hook
+	}
+}
+
+// WithRESTStorageProviders returns an Option function that sets the external REST storage providers in the ServerRunOptions.
+func WithRESTStorageProviders(providers ...storage.RESTStorageProvider) Option {
+	return func(s *options.ServerRunOptions) {
+		s.ExternalRESTStorageProviders = providers
+	}
+}
+
+// WithAlternateDNS returns an Option function that sets the alternate DNS configurations in the ServerRunOptions.
+func WithAlternateDNS(dns ...string) Option {
+	return func(s *options.ServerRunOptions) {
+		s.AlternateDNS = dns
+	}
+}
+
+// NewAPIServerCommand creates a *cobra.Command object with default parameters.
+func NewAPIServerCommand(serverRunOptions ...Option) *cobra.Command {
+	s := options.NewServerRunOptions()
+	for _, opt := range serverRunOptions {
+		opt(s)
+	}
+
+	cmd := &cobra.Command{
+		Use:   "minerx-apiserver",
+		Short: "Launch a minerx API server",
+		Long: `The MinerX API server validates and configures data
+for the api objects which include miners, minersets, configmaps, and
+others. The API Server services REST operations and provides the frontend to the
+minerx's shared state through which all other components interact.`,
+
+		// stop printing usage when the command errors
+		SilenceUsage: true,
+		PersistentPreRunE: func(*cobra.Command, []string) error {
+			// silence client-go warnings.
+			// minerx-apiserver loopback clients should not log self-issued warnings.
+			rest.SetDefaultWarningHandler(rest.NoWarnings{})
+			return nil
+		},
+		RunE: func(cmd *cobra.Command, args []string) error {
+			version.PrintAndExitIfRequested()
+			fs := cmd.Flags()
+
+			// Activate logging as soon as possible, after that
+			// show flags with the final logging configuration.
+			if err := logsapi.ValidateAndApply(s.Logs, utilfeature.DefaultFeatureGate); err != nil {
+				return err
+			}
+			cliflag.PrintFlags(fs)
+
+			// set default options
+			completedOptions, err := s.Complete()
+			if err != nil {
+				return err
+			}
+
+			// validate options
+			if errs := completedOptions.Validate(); len(errs) != 0 {
+				return utilerrors.NewAggregate(errs)
+			}
+			// add feature enablement metrics
+			utilfeature.DefaultMutableFeatureGate.AddMetrics()
+			return Run(cmd.Context(), completedOptions)
+		},
+		Args: func(cmd *cobra.Command, args []string) error {
+			for _, arg := range args {
+				if len(arg) > 0 {
+					return fmt.Errorf("%q does not take any arguments, got %q", cmd.CommandPath(), args)
+				}
+			}
+			return nil
+		},
+	}
+
+	fs := cmd.Flags()
+	namedFlagSets := s.Flags()
+	version.AddFlags(namedFlagSets.FlagSet("global"))
+	globalflag.AddGlobalFlags(namedFlagSets.FlagSet("global"), cmd.Name(), logs.SkipLoggingConfigurationFlags())
+	// The custom flag is actually not used. It is just a placeholder. In order to be consistent with
+	// the kube-apiserver code, learning minerx-apiserver is equivalent to learning kube-apiserver.
+	options.AddCustomGlobalFlags(namedFlagSets.FlagSet("generic"))
+	for _, f := range namedFlagSets.FlagSets {
+		fs.AddFlagSet(f)
+	}
+
+	cols, _, _ := term.TerminalSize(cmd.OutOrStdout())
+	cliflag.SetUsageAndHelpFunc(cmd, namedFlagSets, cols)
+
+	return cmd
+}
+
+// Run runs the specified APIServer. This should never exit.
+func Run(ctx context.Context, opts options.CompletedOptions) error {
+	// To help debugging, immediately log version
+	klog.Infof("Version: %+v", version.Get().String())
+
+	klog.InfoS("Golang settings", "GOGC", os.Getenv("GOGC"), "GOMAXPROCS", os.Getenv("GOMAXPROCS"), "GOTRACEBACK", os.Getenv("GOTRACEBACK"))
+
+	config, err := NewConfig(opts)
+	if err != nil {
+		return err
+	}
+	completed, err := config.Complete()
+	if err != nil {
+		return err
+	}
+	server, err := CreateServerChain(completed)
+	if err != nil {
+		return err
+	}
+
+	prepared, err := server.PrepareRun()
+	if err != nil {
+		return err
+	}
+
+	return prepared.Run(ctx)
+}
+
+// CreateServerChain creates the apiservers connected via delegation.
+func CreateServerChain(config CompletedConfig) (*aggregatorapiserver.APIAggregator, error) {
+	notFoundHandler := notfoundhandler.New(config.KubeAPIs.Generic.Serializer, genericapifilters.NoMuxAndDiscoveryIncompleteKey)
+	apiExtensionsServer, err := config.ApiExtensions.New(genericapiserver.NewEmptyDelegateWithCustomHandler(notFoundHandler))
+	if err != nil {
+		return nil, err
+	}
+	crdAPIEnabled := config.ApiExtensions.GenericConfig.MergedResourceConfig.ResourceEnabled(apiextensionsv1.SchemeGroupVersion.WithResource("customresourcedefinitions"))
+
+	minerxAPIServer, err := config.KubeAPIs.New(apiExtensionsServer.GenericAPIServer)
+	if err != nil {
+		return nil, err
+	}
+
+	// aggregator comes last in the chain
+	aggregatorServer, err := createAggregatorServer(config.Aggregator, minerxAPIServer.GenericAPIServer, apiExtensionsServer.Informers, crdAPIEnabled)
+	if err != nil {
+		// we don't need special handling for innerStopCh because the aggregator server doesn't create any go routines
+		return nil, err
+	}
+
+	return aggregatorServer, nil
+}
+
+// CreateProxyTransport creates the dialer infrastructure to connect to the nodes.
+func CreateProxyTransport() *http.Transport {
+	var proxyDialerFn utilnet.DialFunc
+	// Proxying to pods and services is IP-based... don't expect to be able to verify the hostname
+	proxyTLSClientConfig := &tls.Config{InsecureSkipVerify: true}
+	proxyTransport := utilnet.SetTransportDefaults(&http.Transport{
+		DialContext:     proxyDialerFn,
+		TLSClientConfig: proxyTLSClientConfig,
+	})
+	return proxyTransport
+}
+
+// CreateMinerXAPIServerConfig creates all the resources for running kube-apiserver, but runs none of them.
+func CreateMinerXAPIServerConfig(opts options.CompletedOptions) (
+	*controlplane.Config,
+	aggregatorapiserver.ServiceResolver,
+	error,
+) {
+	proxyTransport := CreateProxyTransport()
+
+	genericConfig, kubeSharedInformers, storageFactory, err := controlplaneapiserver.BuildGenericConfig(
+		opts.CompletedOptions,
+		[]*runtime.Scheme{legacyscheme.Scheme, extensionsapiserver.Scheme, aggregatorscheme.Scheme},
+		opts.GetOpenAPIDefinitions,
+	)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	opts.Metrics.Apply()
+
+	config := &controlplane.Config{
+		Generic: genericConfig,
+		Extra: controlplane.Extra{
+			APIResourceConfigSource: storageFactory.APIResourceConfigSource,
+			StorageFactory:          storageFactory,
+			EventTTL:                opts.EventTTL,
+			EnableLogsSupport:       opts.EnableLogsHandler,
+			ProxyTransport:          proxyTransport,
+			// ExternalGroupResources: opts.ExternalGroupResources,
+			ExternalRESTStorageProviders: opts.ExternalRESTStorageProviders,
+			MasterCount:                  opts.MasterCount,
+			// VersionedInformers:           opts.SharedInformerFactory,
+			// Here we will use the config file of "minerx" to create a client-go informers.
+			// KubeVersionedInformers:     kubeSharedInformers,
+			InternalVersionedInformers: opts.InternalVersionedInformers,
+			ExternalPostStartHooks:     opts.ExternalPostStartHooks,
+		},
+	}
+
+	if utilfeature.DefaultFeatureGate.Enabled(features.UnknownVersionInteroperabilityProxy) {
+		var err error
+		config.PeerEndpointLeaseReconciler, err = CreatePeerEndpointLeaseReconciler(*genericConfig, storageFactory)
+		if err != nil {
+			return nil, nil, err
+		}
+		if opts.PeerCAFile != "" {
+			leaseInformer := kubeSharedInformers.Coordination().V1().Leases()
+			config.PeerProxy, err = apiserver.BuildPeerProxy(
+				leaseInformer,
+				genericConfig.LoopbackClientConfig,
+				opts.ProxyClientCertFile,
+				opts.ProxyClientKeyFile, opts.PeerCAFile,
+				opts.PeerAdvertiseAddress,
+				genericConfig.APIServerID,
+				config.Extra.PeerEndpointLeaseReconciler,
+				config.Generic.Serializer)
+			if err != nil {
+				return nil, nil, err
+			}
+		}
+	}
+
+	/* UPDATEME: when add authentication features.
+	clientCAProvider, err := opts.Authentication.ClientCert.GetClientCAContentProvider()
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	config.ExtraConfig.ClusterAuthenticationInfo.ClientCA = clientCAProvider
+
+	requestHeaderConfig, err := opts.Authentication.RequestHeader.ToAuthenticationRequestHeaderConfig()
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	if requestHeaderConfig != nil {
+		config.ExtraConfig.ClusterAuthenticationInfo.RequestHeaderCA = requestHeaderConfig.CAContentProvider
+		config.ExtraConfig.ClusterAuthenticationInfo.RequestHeaderAllowedNames = requestHeaderConfig.AllowedClientNames
+		config.ExtraConfig.ClusterAuthenticationInfo.RequestHeaderExtraHeaderPrefixes = requestHeaderConfig.ExtraHeaderPrefixes
+		config.ExtraConfig.ClusterAuthenticationInfo.RequestHeaderGroupHeaders = requestHeaderConfig.GroupHeaders
+		config.ExtraConfig.ClusterAuthenticationInfo.RequestHeaderUsernameHeaders = requestHeaderConfig.UsernameHeaders
+	}
+	*/
+
+	serviceResolver := buildServiceResolver(opts.EnableAggregatorRouting, genericConfig.LoopbackClientConfig.Host, kubeSharedInformers)
+
+	return config, serviceResolver, nil
+}
+
+var testServiceResolver webhook.ServiceResolver
+
+func buildServiceResolver(enabledAggregatorRouting bool, hostname string, informer kubeinformers.SharedInformerFactory) webhook.ServiceResolver {
+	if testServiceResolver != nil {
+		return testServiceResolver
+	}
+
+	var serviceResolver webhook.ServiceResolver
+	if enabledAggregatorRouting {
+		serviceResolver = aggregatorapiserver.NewEndpointServiceResolver(
+			informer.Core().V1().Services().Lister(),
+			informer.Core().V1().Endpoints().Lister(),
+		)
+	} else {
+		serviceResolver = aggregatorapiserver.NewClusterIPServiceResolver(
+			informer.Core().V1().Services().Lister(),
+		)
+	}
+
+	// resolve kubernetes.default.svc locally
+	if localHost, err := url.Parse(hostname); err == nil {
+		serviceResolver = aggregatorapiserver.NewLoopbackServiceResolver(serviceResolver, localHost)
+	}
+	return serviceResolver
+}
+
+// CreatePeerEndpointLeaseReconciler creates a apiserver endpoint lease reconciliation loop
+// The peer endpoint leases are used to find network locations of apiservers for peer proxy
+func CreatePeerEndpointLeaseReconciler(c genericapiserver.RecommendedConfig, storageFactory serverstorage.StorageFactory) (reconcilers.PeerEndpointLeaseReconciler, error) {
+	ttl := apiserver.DefaultPeerEndpointReconcilerTTL
+	config, err := storageFactory.NewConfig(api.Resource("apiServerPeerIPInfo"), &api.Endpoints{})
+	if err != nil {
+		return nil, fmt.Errorf("error creating storage factory config: %w", err)
+	}
+	reconciler, err := reconcilers.NewPeerEndpointLeaseReconciler(config, "/peerserverleases/", ttl)
+	return reconciler, err
+}

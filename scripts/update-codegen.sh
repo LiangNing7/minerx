@@ -456,6 +456,8 @@ function codegen::conversions() {
     done
 
     local extra_peer_pkgs=(
+        k8s.io/component-base/config
+        k8s.io/component-base/config/v1alpha1
         k8s.io/kubernetes/pkg/apis/core
         k8s.io/kubernetes/pkg/apis/core/v1
         k8s.io/api/core/v1

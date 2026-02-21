@@ -45,6 +45,7 @@ require (
 	go.uber.org/automaxprocs v1.6.0
 	golang.org/x/sync v0.18.0
 	golang.org/x/text v0.31.0
+	golang.org/x/time v0.14.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20251111163417-95abcf5c77ba
 	google.golang.org/grpc v1.76.0
 	google.golang.org/protobuf v1.36.10
@@ -57,15 +58,16 @@ require (
 	k8s.io/client-go v1.5.2
 	k8s.io/code-generator v0.33.2
 	k8s.io/component-base v0.33.2
+	k8s.io/controller-manager v0.33.2
 	k8s.io/gengo v0.0.0-20250130153323-76c5745d3511
 	k8s.io/klog/v2 v2.130.1
 	k8s.io/kube-aggregator v0.0.0
 	k8s.io/kube-openapi v0.0.0-20250910181357-589584f1c912
 	k8s.io/kubernetes v0.0.0-00010101000000-000000000000
 	k8s.io/utils v0.0.0-20251002143259-bc988d571ff4
-	sigs.k8s.io/controller-runtime v0.17.5
+	sigs.k8s.io/controller-runtime v0.19.4
 	sigs.k8s.io/randfill v1.0.0
-	sigs.k8s.io/structured-merge-diff/v4 v4.7.0
+	sigs.k8s.io/structured-merge-diff/v4 v4.6.0
 )
 
 require (
@@ -231,7 +233,6 @@ require (
 	golang.org/x/oauth2 v0.33.0 // indirect
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/term v0.37.0 // indirect
-	golang.org/x/time v0.14.0 // indirect
 	golang.org/x/tools v0.39.0 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251111163417-95abcf5c77ba // indirect
@@ -247,11 +248,12 @@ require (
 	gorm.io/driver/sqlserver v1.6.0 // indirect
 	gorm.io/hints v1.1.0 // indirect
 	gorm.io/plugin/dbresolver v1.6.2 // indirect
-	k8s.io/component-helpers v0.0.0 // indirect
-	k8s.io/controller-manager v0.0.0 // indirect
+	k8s.io/cloud-provider v0.33.2 // indirect
+	k8s.io/component-helpers v0.33.2 // indirect
 	k8s.io/endpointslice v0.0.0 // indirect
 	k8s.io/gengo/v2 v2.0.0-20250604051438-85fd79dbfd9f // indirect
 	k8s.io/kms v0.33.2 // indirect
+	k8s.io/kube-controller-manager v0.0.0 // indirect
 	k8s.io/kubelet v0.0.0 // indirect
 	modernc.org/libc v1.22.2 // indirect
 	modernc.org/mathutil v1.5.0 // indirect

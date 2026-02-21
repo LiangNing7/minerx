@@ -1,4 +1,4 @@
-// Package apiserver does all of the work necessary to create a OneX
+// Package apiserver does all of the work necessary to create a MinerX
 // APIServer by binding together the API, master and APIServer infrastructure.
 //
 //nolint:nakedret
@@ -96,7 +96,7 @@ func BuildGenericConfig(
 	// Use protobufs for self-communication.
 	// Since not every generic apiserver has to support protobufs, we
 	// cannot default to it in generic apiserver and need to explicitly
-	// set it in onex-apiserver.
+	// set it in minerx-apiserver.
 	genericConfig.LoopbackClientConfig.ContentConfig.ContentType = "application/vnd.kubernetes.protobuf"
 	// Disable compression for self-communication, since we are going to be
 	// on a fast local network
@@ -105,7 +105,7 @@ func BuildGenericConfig(
 	loopbackClientConfig := genericConfig.LoopbackClientConfig
 
 	// Build kubernetes client
-	// Use onex's config to mock a kubernetes client.
+	// Use minerx's config to mock a kubernetes client.
 	kubeClient, err := clientset.NewForConfig(loopbackClientConfig)
 	if err != nil {
 		lastErr = fmt.Errorf("failed to create real external clientset: %v", err)
@@ -131,10 +131,10 @@ func BuildGenericConfig(
 	// namer := openapinamer.NewDefinitionNamer(legacyscheme.Scheme)
 	namer := openapinamer.NewDefinitionNamer(schemes...)
 	genericConfig.OpenAPIConfig = genericapiserver.DefaultOpenAPIConfig(getOpenAPIDefinitions, namer)
-	genericConfig.OpenAPIConfig.Info.Title = "OneX"
+	genericConfig.OpenAPIConfig.Info.Title = "MinerX"
 	genericConfig.OpenAPIConfig.Info.Version = "v0.0.1"
 	genericConfig.OpenAPIV3Config = genericapiserver.DefaultOpenAPIV3Config(getOpenAPIDefinitions, namer)
-	genericConfig.OpenAPIV3Config.Info.Title = "OneX"
+	genericConfig.OpenAPIV3Config.Info.Title = "MinerX"
 	genericConfig.OpenAPIV3Config.Info.Version = "v0.0.1"
 	// Not in use, just serving as a placeholder.
 	genericConfig.LongRunningFunc = filters.BasicLongRunningRequestCheck(

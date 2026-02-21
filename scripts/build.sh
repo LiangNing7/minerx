@@ -2,7 +2,7 @@
 
 # This script sets up a go workspace locally and builds all go components.
 # Usage: `scripts/build.sh <component name> <platform >`.
-# Example: `scripts/build.sh onex-usercenter linux_amd64`
+# Example: `scripts/build.sh minerx-usercenter linux_amd64`
 
 set -o errexit
 set -o nounset

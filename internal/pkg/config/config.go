@@ -16,7 +16,7 @@ type ConfigurationName string
 
 // Configuration name.
 const (
-	OneXName        ConfigurationName = "onex"
+	MinerXName      ConfigurationName = "minerx"
 	MinerTypesName  ConfigurationName = "minertypes"
 	IDGeneraterName ConfigurationName = "idgenerater"
 )

@@ -16,7 +16,7 @@ import (
 )
 
 func CreateAPIExtensionsConfig(
-	onexAPIServerConfig server.Config,
+	minerxAPIServerConfig server.Config,
 	kubeInformers kubeinformers.SharedInformerFactory,
 	pluginInitializers []admission.PluginInitializer,
 	commandOptions controlplaneoptions.CompletedOptions,
@@ -26,7 +26,7 @@ func CreateAPIExtensionsConfig(
 ) (*apiextensionsapiserver.Config, error) {
 	// make a shallow copy to let us twiddle a few things
 	// most of the config actually remains the same.  We only need to mess with a couple items related to the particulars of the apiextensions
-	genericConfig := onexAPIServerConfig
+	genericConfig := minerxAPIServerConfig
 	genericConfig.PostStartHooks = map[string]server.PostStartHookConfigEntry{}
 	genericConfig.RESTOptionsGetter = nil
 

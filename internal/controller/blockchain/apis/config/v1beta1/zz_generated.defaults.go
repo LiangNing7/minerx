@@ -18,12 +18,12 @@ import (
 // Public to allow building arbitrary schemes.
 // All generated defaulters are covering - they call all nested defaulters.
 func RegisterDefaults(scheme *runtime.Scheme) error {
-	scheme.AddTypeDefaultingFunc(&MinerXControllerManagerConfiguration{}, func(obj interface{}) {
-		SetObjectDefaults_MinerXControllerManagerConfiguration(obj.(*MinerXControllerManagerConfiguration))
+	scheme.AddTypeDefaultingFunc(&BlockchainControllerConfiguration{}, func(obj interface{}) {
+		SetObjectDefaults_BlockchainControllerConfiguration(obj.(*BlockchainControllerConfiguration))
 	})
 	return nil
 }
 
-func SetObjectDefaults_MinerXControllerManagerConfiguration(in *MinerXControllerManagerConfiguration) {
-	SetDefaults_MinerXControllerManagerConfiguration(in)
+func SetObjectDefaults_BlockchainControllerConfiguration(in *BlockchainControllerConfiguration) {
+	SetDefaults_BlockchainControllerConfiguration(in)
 }

@@ -14,7 +14,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 
-	"github.com/LiangNing7/minerx/internal/controller/apis/config"
+	"github.com/LiangNing7/minerx/internal/controller/blockchain/apis/config"
 	"github.com/LiangNing7/minerx/internal/pkg/known"
 	"github.com/LiangNing7/minerx/internal/pkg/util/annotations"
 	"github.com/LiangNing7/minerx/internal/pkg/util/conditions"

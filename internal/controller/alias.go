@@ -70,7 +70,7 @@ func (r *MinerSetReconciler) SetupWithManager(ctx context.Context, mgr ctrl.Mana
 	}).SetupWithManager(ctx, mgr, options)
 }
 
-// SyncReconciler sync onex resource to database.
+// SyncReconciler sync minerx resource to database.
 type SyncReconciler struct {
 	Store store.IStore
 }

@@ -57,6 +57,6 @@ func SetDefaults_BlockchainControllerConfiguration(obj *BlockchainControllerConf
 
 func RecommendedDefaultChainControllerConfiguration(obj *ChainControllerConfiguration) {
 	if obj.Image == "" {
-		obj.Image = "ccr.ccs.tencentyun.com/LiangNing7/minerx-toyblc-amd64:v0.1.0"
+		obj.Image = "ccr.ccs.tencentyun.com/liangning7/minerx-toyblc-amd64:v0.1.0"
 	}
 }

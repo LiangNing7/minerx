@@ -33,7 +33,7 @@ import (
 	"github.com/LiangNing7/minerx/third_party/protobuf/k8s.io/apimachinery/pkg/api/errors"
 )
 
-// MaxConcurrency used to prevent the high load of onex-apiserver caused by excessive concurrency,
+// MaxConcurrency used to prevent the high load of minerx-apiserver caused by excessive concurrency,
 // it is necessary to limit the miner create/delete concurrency.
 const MaxConcurrency = 30
 

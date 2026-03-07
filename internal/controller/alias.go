@@ -18,7 +18,7 @@ import (
 )
 
 // Following types provides access to reconcilers implemented in internal/controller, thus
-// allowing users to provide a single binary "batteries included" with OneX and providers of choice.
+// allowing users to provide a single binary "batteries included" with MinerX and providers of choice.
 
 // ChainReconciler reconciles a Chain object.
 type ChainReconciler struct {

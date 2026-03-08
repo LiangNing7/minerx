@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "gateway/v1/errors.proto",
+    "title": "cacheserver/v1/errors.proto",
     "version": "version not set"
   },
   "consumes": [

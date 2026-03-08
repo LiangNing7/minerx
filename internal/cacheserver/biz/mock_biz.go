@@ -1,0 +1,62 @@
+// Package biz is a generated GoMock package.
+package biz
+
+import (
+	reflect "reflect"
+
+	gomock "github.com/golang/mock/gomock"
+
+	namespaced "github.com/LiangNing7/minerx/internal/cacheserver/biz/v1/namespaced"
+	secret "github.com/LiangNing7/minerx/internal/cacheserver/biz/v1/secret"
+)
+
+// MockIBiz is a mock of IBiz interface.
+type MockIBiz struct {
+	ctrl     *gomock.Controller
+	recorder *MockIBizMockRecorder
+}
+
+// MockIBizMockRecorder is the mock recorder for MockIBiz.
+type MockIBizMockRecorder struct {
+	mock *MockIBiz
+}
+
+// NewMockIBiz creates a new mock instance.
+func NewMockIBiz(ctrl *gomock.Controller) *MockIBiz {
+	mock := &MockIBiz{ctrl: ctrl}
+	mock.recorder = &MockIBizMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockIBiz) EXPECT() *MockIBizMockRecorder {
+	return m.recorder
+}
+
+// NamespacedV1 mocks base method.
+func (m *MockIBiz) NamespacedV1(arg0 string) namespaced.NamespacedBiz {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NamespacedV1", arg0)
+	ret0, _ := ret[0].(namespaced.NamespacedBiz)
+	return ret0
+}
+
+// NamespacedV1 indicates an expected call of NamespacedV1.
+func (mr *MockIBizMockRecorder) NamespacedV1(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NamespacedV1", reflect.TypeOf((*MockIBiz)(nil).NamespacedV1), arg0)
+}
+
+// SecretV1 mocks base method.
+func (m *MockIBiz) SecretV1() secret.SecretBiz {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SecretV1")
+	ret0, _ := ret[0].(secret.SecretBiz)
+	return ret0
+}
+
+// SecretV1 indicates an expected call of SecretV1.
+func (mr *MockIBizMockRecorder) SecretV1() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SecretV1", reflect.TypeOf((*MockIBiz)(nil).SecretV1))
+}

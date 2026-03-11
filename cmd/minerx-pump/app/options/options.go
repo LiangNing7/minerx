@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	// UserAgent is the userAgent name when starting onex-pump server.
+	// UserAgent is the userAgent name when starting minerx-pump server.
 	UserAgent = "minerx-pump"
 )
 

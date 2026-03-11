@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package toyblc.v1;
+
+option go_package = "github.com/LiangNing7/minerx/pkg/api/toyblc/v1;v1";
+
+message CreateBlockRequest {
+  string data = 1;
+}
+
+message CreatePeerRequest {
+  string peer = 1;
+}
+
